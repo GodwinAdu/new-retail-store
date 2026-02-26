@@ -1067,8 +1067,8 @@ export default function POSPage() {
                                         Pay with Card
                                     </Button>
                                     <Button
-                                        variant="outline"
-                                        className="w-full border-white/20 text-white hover:bg-gradient-to-r hover:from-green-500/20 hover:to-emerald-500/20 hover:border-green-400/40 py-3 rounded-xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-[1.02]"
+                                        // variant="outline"
+                                        className="w-full border-white/20 bg-white text-black hover:bg-gradient-to-r hover:from-green-500/20 hover:to-emerald-500/20 hover:border-green-400/40 py-3 rounded-xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-[1.02]"
                                         onClick={() => { setShowPayment(true); setPaymentMethod("cash"); }}
                                     >
                                         <DollarSign className="w-5 h-5 mr-2" />
