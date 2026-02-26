@@ -118,12 +118,15 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-slate-600 rounded-xl flex items-center justify-center">
-                <ShoppingCart className="w-6 h-6 text-white" />
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/50 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+                  <Zap className="w-6 h-6 text-white relative z-10 drop-shadow-lg" />
+                </div>
               </div>
               <div>
-                <span className="text-xl font-bold text-gray-900">
-                  RetailPOS
+                <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                  QounterPay
                 </span>
                 <div className="text-xs text-emerald-600">
                   Professional Management
@@ -218,7 +221,7 @@ export default function HomePage() {
                         <div className="w-3 h-3 bg-amber-500 rounded-full" />
                         <div className="w-3 h-3 bg-emerald-500 rounded-full" />
                       </div>
-                      <div className="text-xs text-gray-400 font-mono">RetailPOS Dashboard</div>
+                      <div className="text-xs text-gray-400 font-mono">QounterPay Dashboard</div>
                     </div>
                     
                     {/* Dashboard Content */}
@@ -1024,14 +1027,17 @@ export default function HomePage() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-2xl">
-                  <ShoppingCart className="w-6 h-6 text-white" />
+                <div className="relative">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/50 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+                    <Zap className="w-6 h-6 text-white relative z-10 drop-shadow-lg" />
+                  </div>
                 </div>
                 <div>
-                  <span className="text-2xl font-black bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    RetailPOS
+                  <span className="text-2xl font-black bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    QounterPay
                   </span>
-                  <div className="text-sm text-cyan-400 font-medium">
+                  <div className="text-sm text-emerald-400 font-medium">
                     Next-Gen Retail Platform
                   </div>
                 </div>
@@ -1153,7 +1159,7 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <p className="text-gray-400 font-medium">
-              © {new Date().getFullYear()} RetailPOS. All rights reserved.
+              © {new Date().getFullYear()} QounterPay. All rights reserved.
               <span className="text-cyan-400">
                 Built for the future of retail.
               </span>

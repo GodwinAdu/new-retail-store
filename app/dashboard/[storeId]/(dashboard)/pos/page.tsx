@@ -431,13 +431,14 @@ export default function POSPage() {
                     <div className="flex items-center space-x-8">
                         <div className="flex items-center space-x-4">
                             <div className="relative">
-                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl">
-                                    <Zap className="w-7 h-7 text-white" />
+                                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/50 relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+                                    <Zap className="w-7 h-7 text-white relative z-10 drop-shadow-lg" />
                                 </div>
                                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black animate-pulse"></div>
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">RetailPOS Pro</h1>
+                                <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow-lg">QounterPay</h1>
                                 <div className="flex items-center space-x-2">
                                     <p className="text-xs text-gray-400">Terminal #001</p>
                                     <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs px-2 py-0">
@@ -1189,7 +1190,7 @@ export default function POSPage() {
                         <div className="space-y-4">
                             <div className="bg-white/5 rounded-lg p-4 space-y-2">
                                 <div className="text-center border-b border-white/10 pb-2">
-                                    <h3 className="text-white font-bold">RetailPOS Pro</h3>
+                                    <h3 className="text-white font-bold">QounterPay</h3>
                                     <p className="text-gray-400 text-sm">{lastSale.timestamp.toLocaleString()}</p>
                                     <p className="text-gray-400 text-sm">Receipt #{lastSale.id}</p>
                                 </div>
