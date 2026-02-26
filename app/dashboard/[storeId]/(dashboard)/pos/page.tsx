@@ -371,17 +371,17 @@ export default function POSPage() {
                     ...newCustomer
                 };
 
-                const customer = await createCustomer(storeId, customerData);
+                const result = await createCustomer(storeId, customerData);
 
-                if (customer) {
-                    setCustomers(prev => [...prev, customer]);
-                    setSelectedCustomer(customer);
+                if (result?.success && result.data) {
+                    setCustomers(prev => [...prev, result.data]);
+                    setSelectedCustomer(result.data);
                     setNewCustomer({ name: "", email: "", phone: "" });
                     setShowNewCustomer(false);
                     setShowCustomer(false);
-                    toast.success(`Customer added: ${customer.name}`);
+                    toast.success(`Customer added: ${result.data.name}`);
                 } else {
-                    toast.error("Failed to add customer");
+                    toast.error(result?.error || "Failed to add customer");
                 }
             } catch (error) {
                 console.error("Add customer error:", error);
@@ -796,7 +796,7 @@ export default function POSPage() {
                         <div className="flex space-x-2">
                             {categories.map((category) => (
                                 <Button
-                                    key={category}
+                                    key={typeof category === 'string' ? category : category._id}
                                     variant={selectedCategory === category ? "default" : "outline"}
                                     onClick={() => setSelectedCategory(category)}
                                     className={`rounded-xl transition-all duration-300 ${selectedCategory === category
@@ -804,7 +804,7 @@ export default function POSPage() {
                                         : "border-white/20 !text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 hover:border-white/30"
                                         }`}
                                 >
-                                    {category}
+                                    {typeof category === 'string' ? category : category.name}
                                 </Button>
                             ))}
                         </div>
@@ -844,7 +844,9 @@ export default function POSPage() {
                                                 </div>
                                                 <h3 className="text-white font-medium text-xs mb-1 truncate">{product.name}</h3>
                                                 <div className="flex justify-between items-center mb-1">
-                                                    <Badge variant="secondary" className="text-[10px] bg-white/10 px-1 py-0">{product.categoryId?.name || product.category}</Badge>
+                                                    <Badge variant="secondary" className="text-[10px] bg-white/10 px-1 py-0">
+                                                        {product.category || 'Uncategorized'}
+                                                    </Badge>
                                                     <span className="text-[10px] text-gray-400">{product.stock}</span>
                                                 </div>
                                                 <p className="text-green-400 font-bold text-sm">₵{product.price}</p>
@@ -873,7 +875,9 @@ export default function POSPage() {
                                                     <div className="flex-1 min-w-0">
                                                         <h3 className="text-white font-medium text-sm mb-1 truncate">{product.name}</h3>
                                                         <div className="flex items-center space-x-2 mb-2">
-                                                            <Badge variant="secondary" className="text-xs bg-white/10">{product.categoryId?.name || product.category}</Badge>
+                                                            <Badge variant="secondary" className="text-xs bg-white/10">
+                                                                {product.category || 'Uncategorized'}
+                                                            </Badge>
                                                             <span className="text-xs text-gray-400">Stock: {product.stock}</span>
                                                         </div>
                                                         <p className="text-green-400 font-bold text-lg">₵{product.price}</p>

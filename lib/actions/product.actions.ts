@@ -13,11 +13,14 @@ export const getProducts = withSubscriptionCheckByStoreId(async (storeId: string
       .lean();
     
     // Map categoryId to category for consistency
-    const productsWithCategory = products.map(product => ({
-      ...product,
-      category: product.categoryId,
-      categoryId: product.categoryId?._id
-    }));
+    const productsWithCategory = products.map(product => {
+      const categoryData = product.categoryId as any;
+      return {
+        ...product,
+        category: categoryData?.name || 'Uncategorized',
+        categoryId: categoryData?._id
+      };
+    });
     
     return JSON.parse(JSON.stringify(productsWithCategory));
   } catch (error) {
