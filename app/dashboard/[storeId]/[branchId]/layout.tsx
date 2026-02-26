@@ -10,7 +10,7 @@ export default async function DashboardLayout({ children, params }: DashboardLay
     const { storeId, branchId } = await params;
     return (
         <SubscriptionBlocker storeId={storeId}>
-            <SettingsProvider branchId={branchId}>
+            <SettingsProvider storeId={storeId}>
                 <div className="w-full">
                     {children}
                 </div>

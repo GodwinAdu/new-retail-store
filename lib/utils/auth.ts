@@ -4,12 +4,12 @@ import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import { connectToDB } from "../mongoose";
 import User from "../models/user.models";
+import { validateTokenSecretKey } from "../utils/env-validation";
 
-if (!process.env.TOKEN_SECRET_KEY!) {
-  throw new Error("TOKEN_SECRET_KEY environment variable is required");
-}
+// Validate environment on module load
+validateTokenSecretKey();
 
-const SECRET_KEY = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY);
+const SECRET_KEY = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY!);
 
 export async function getCurrentUser() {
   try {

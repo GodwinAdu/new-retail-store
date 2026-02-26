@@ -1,0 +1,1099 @@
+﻿
+> retail-pos@0.1.0 lint
+> eslint
+
+
+C:\Users\Jr\Desktop\retail-pos\app\(auth)\(routes)\sign-in\_components\LoginForm.tsx
+  42:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\app\(auth)\(routes)\sign-in\page.tsx
+  171:36  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\Jr\Desktop\retail-pos\app\(auth)\(routes)\sign-up\_components\SignupForm.tsx
+   6:36  warning  'Mail' is defined but never used          @typescript-eslint/no-unused-vars
+   6:42  warning  'Phone' is defined but never used         @typescript-eslint/no-unused-vars
+   6:49  warning  'MapPin' is defined but never used        @typescript-eslint/no-unused-vars
+  48:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\app\(auth)\(routes)\sign-up\page.tsx
+    4:61  warning  'Shield' is defined but never used                               @typescript-eslint/no-unused-vars
+    4:69  warning  'Zap' is defined but never used                                  @typescript-eslint/no-unused-vars
+    4:74  warning  'Globe' is defined but never used                                @typescript-eslint/no-unused-vars
+  151:87  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\customers\CustomersClient.tsx
+  44:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\customers\CustomersClient.tsx:44:5
+  42 |       customer.phone?.includes(searchTerm)
+  43 |     );
+> 44 |     setFilteredCustomers(filtered);
+     |     ^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  45 |   }, [customers, searchTerm]);
+  46 |
+  47 |   const refreshData = async () => {  react-hooks/set-state-in-effect
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\pos\page.tsx
+     4:109  warning  'Receipt' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+     4:195  warning  'Percent' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+    10:16   warning  'TabsContent' is defined but never used                                                                         @typescript-eslint/no-unused-vars
+    14:10   warning  'Textarea' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+    38:11   warning  'CartItem' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+    72:46   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+    75:46   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+    77:52   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+    82:60   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+   136:8    warning  React Hook useEffect has a missing dependency: 'posSettings'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   146:33   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+   148:96   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+   175:47   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+   456:84   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                 react/no-unescaped-entities
+   610:58   warning  'error' is defined but never used                                                                               @typescript-eslint/no-unused-vars
+  1201:64   error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\reports\ReportsClient.tsx
+   3:20  warning  'useEffect' is defined but never used            @typescript-eslint/no-unused-vars
+  10:39  warning  'ResponsiveContainer' is defined but never used  @typescript-eslint/no-unused-vars
+  44:10  warning  'loading' is assigned a value but never used     @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\sales\SalesClient.tsx
+   4:81  warning  'Filter' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  56:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\sales\SalesClient.tsx:56:5
+  54 |     }
+  55 |
+> 56 |     setFilteredSales(filtered);
+     |     ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  57 |   }, [sales, searchTerm, statusFilter]);
+  58 |
+  59 |   const refreshData = async () => {  react-hooks/set-state-in-effect
+  71:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\sales\SalesClient.tsx:71:5
+  69 |
+  70 |   useEffect(() => {
+> 71 |     refreshData();
+     |     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  72 |   }, [startDate, endDate]);
+  73 |
+  74 |   const handleViewDetails = (saleId: string) => {     react-hooks/set-state-in-effect
+  72:6   warning  React Hook useEffect has a missing dependency: 'refreshData'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/exhaustive-deps
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\settings\SettingsClient.tsx
+  11:17  warning  'MapPin' is defined but never used                         @typescript-eslint/no-unused-vars
+  11:46  warning  'Settings2' is defined but never used                      @typescript-eslint/no-unused-vars
+  11:80  warning  'Trash2' is defined but never used                         @typescript-eslint/no-unused-vars
+  11:88  warning  'AlertTriangle' is defined but never used                  @typescript-eslint/no-unused-vars
+  17:11  error    Unexpected any. Specify a different type                   @typescript-eslint/no-explicit-any
+  18:12  error    Unexpected any. Specify a different type                   @typescript-eslint/no-explicit-any
+  25:12  warning  'showDeleteConfirm' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  25:31  warning  'setShowDeleteConfirm' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\settings\page.tsx
+  1:10  warning  'Settings' is defined but never used     @typescript-eslint/no-unused-vars
+  1:20  warning  'Store' is defined but never used        @typescript-eslint/no-unused-vars
+  1:27  warning  'MapPin' is defined but never used       @typescript-eslint/no-unused-vars
+  1:35  warning  'User' is defined but never used         @typescript-eslint/no-unused-vars
+  1:41  warning  'Save' is defined but never used         @typescript-eslint/no-unused-vars
+  2:10  warning  'Button' is defined but never used       @typescript-eslint/no-unused-vars
+  3:10  warning  'Card' is defined but never used         @typescript-eslint/no-unused-vars
+  3:16  warning  'CardContent' is defined but never used  @typescript-eslint/no-unused-vars
+  3:29  warning  'CardHeader' is defined but never used   @typescript-eslint/no-unused-vars
+  3:41  warning  'CardTitle' is defined but never used    @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\staff\StaffPageClient.tsx
+   16:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   17:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   18:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  126:80  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\(dashboard)\suppliers\SuppliersClient.tsx
+   45:6   warning  React Hook useEffect has a missing dependency: 'fetchSuppliers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   75:14  warning  'error' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+  101:16  warning  'error' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\_components\BillingBanner.tsx
+  14:52  error    Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  45:11  warning  'isActive' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\_components\DashboardClient.tsx
+   10:5    warning  'TrendingUp' is defined but never used                                                                                @typescript-eslint/no-unused-vars
+   39:11   error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+   44:56   error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+   71:8    warning  React Hook useEffect has a missing dependency: 'loadDashboardData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   73:43   error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+  351:121  error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+  456:110  error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\_components\DashboardClient2.tsx
+   11:5    warning  'Clock' is defined but never used                                                                                     @typescript-eslint/no-unused-vars
+   22:5    warning  'Store' is defined but never used                                                                                     @typescript-eslint/no-unused-vars
+   30:10   warning  'Calendar' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+   44:11   error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+   49:56   error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+   78:8    warning  React Hook useEffect has a missing dependency: 'loadDashboardData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   80:43   error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+  519:121  error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+  644:110  error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\billing\_components\BillingClient.tsx
+   13:11  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   17:52  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  197:43  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  197:51  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  198:48  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  198:53  warning  'index' is defined but never used         @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\billing\page.tsx
+  15:17  warning  'storeId' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  23:13  error    Error: Avoid constructing JSX within try/catch
+
+React does not immediately render components when JSX is rendered, so any errors from this component will not be caught by the try/catch. To catch errors in rendering a given component, wrap that component in an error boundary. (https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary).
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\billing\page.tsx:23:13
+  21 |
+  22 |         return (
+> 23 |             <ProtectedRoute user={user} requiredPermissions={[PERMISSIONS.VIEW_BILLING]}>
+     |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |                 <BillingClient user={user} />
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |             </ProtectedRoute>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid constructing JSX within try/catch
+  26 |         );
+  27 |     } catch (error) {
+  28 |         console.error("Billing error:", error);  react-hooks/error-boundaries
+  24:17  error    Error: Avoid constructing JSX within try/catch
+
+React does not immediately render components when JSX is rendered, so any errors from this component will not be caught by the try/catch. To catch errors in rendering a given component, wrap that component in an error boundary. (https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary).
+
+C:\Users\Jr\Desktop\retail-pos\app\dashboard\[storeId]\billing\page.tsx:24:17
+  22 |         return (
+  23 |             <ProtectedRoute user={user} requiredPermissions={[PERMISSIONS.VIEW_BILLING]}>
+> 24 |                 <BillingClient user={user} />
+     |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Avoid constructing JSX within try/catch
+  25 |             </ProtectedRoute>
+  26 |         );
+  27 |     } catch (error) {                                                                                                                                                                                                       react-hooks/error-boundaries
+
+C:\Users\Jr\Desktop\retail-pos\app\layout.tsx
+  29:9  error  Synchronous scripts should not be used. See: https://nextjs.org/docs/messages/no-sync-scripts  @next/next/no-sync-scripts
+
+C:\Users\Jr\Desktop\retail-pos\app\page.tsx
+   15:3   warning  'ArrowRight' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+   66:23  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Jr\Desktop\retail-pos\app\page.tsx:66:23
+  64 |           }}
+  65 |           transition={{
+> 66 |             duration: Math.random() * 3 + 2,
+     |                       ^^^^^^^^^^^^^ Cannot call impure function
+  67 |             repeat: Number.POSITIVE_INFINITY,
+  68 |             repeatType: "loop",
+  69 |             ease: "easeInOut",  react-hooks/purity
+  110:9   warning  'y' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  111:9   warning  'opacity' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  940:39  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react/no-unescaped-entities
+
+C:\Users\Jr\Desktop\retail-pos\components\3d\POSScene.tsx
+  7:13  warning  'THREE' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\components\AddProductDialog.tsx
+  10:16  warning  'Tag' is defined but never used             @typescript-eslint/no-unused-vars
+  12:25  warning  'createCategory' is defined but never used  @typescript-eslint/no-unused-vars
+  29:48  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  30:46  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\CreateSaleDialog.tsx
+   9:25  warning  'Search' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  37:7   error    Error: Cannot access variable before it is declared
+
+`loadData` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Jr\Desktop\retail-pos\components\CreateSaleDialog.tsx:37:7
+  35 |   useEffect(() => {
+  36 |     if (open) {
+> 37 |       loadData();
+     |       ^^^^^^^^ `loadData` accessed before it is declared
+  38 |     }
+  39 |   }, [open]);
+  40 |
+
+C:\Users\Jr\Desktop\retail-pos\components\CreateSaleDialog.tsx:41:3
+  39 |   }, [open]);
+  40 |
+> 41 |   const loadData = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |     const [productsData, customersData] = await Promise.all([
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 43 |       getProducts(storeId),
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 44 |       getCustomers(storeId)
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 45 |     ]);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 46 |     setProducts(productsData);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 47 |     setCustomers(customersData);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 48 |   };
+     | ^^^^^ `loadData` is declared here
+  49 |
+  50 |   const handleProductChange = (productId: string) => {
+  51 |     const product = products.find(p => p._id === productId);  react-hooks/immutability
+  39:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+
+C:\Users\Jr\Desktop\retail-pos\components\CustomerDetailsDialog.tsx
+   18:58  error    Unexpected any. Specify a different type                                                                                @typescript-eslint/no-explicit-any
+   19:10  warning  'loading' is assigned a value but never used                                                                            @typescript-eslint/no-unused-vars
+   25:6   warning  React Hook useEffect has a missing dependency: 'loadCustomerDetails'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  134:65  error    Unexpected any. Specify a different type                                                                                @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\DashboardWidgets.tsx
+   38:6  warning  React Hook useEffect has a missing dependency: 'fetchAlerts'. Either include it or remove the dependency array       react-hooks/exhaustive-deps
+   96:6  warning  React Hook useEffect has a missing dependency: 'fetchTopProducts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  153:6  warning  React Hook useEffect has a missing dependency: 'fetchRevenue'. Either include it or remove the dependency array      react-hooks/exhaustive-deps
+  227:6  warning  React Hook useEffect has a missing dependency: 'fetchStatus'. Either include it or remove the dependency array       react-hooks/exhaustive-deps
+
+C:\Users\Jr\Desktop\retail-pos\components\EditProductDialog.tsx
+  16:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  75:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\InventoryClient.tsx
+    4:27  warning  'Filter' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+   23:9   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   29:44  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   30:48  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   36:56  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   41:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  114:15  warning  'headers' is assigned a value but never used                                                                 @typescript-eslint/no-unused-vars
+  121:17  warning  'productData' is assigned a value but never used                                                             @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\components\LowStockAlert.tsx
+  17:62  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  22:13  error    Error: Cannot access variable before it is declared
+
+`checkLowStock` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Jr\Desktop\retail-pos\components\LowStockAlert.tsx:22:13
+  20 |     useEffect(() => {
+  21 |         if (inventorySettings.lowStockAlert && !dismissed) {
+> 22 |             checkLowStock();
+     |             ^^^^^^^^^^^^^ `checkLowStock` accessed before it is declared
+  23 |         }
+  24 |     }, [inventorySettings.lowStockAlert, storeId, dismissed]);
+  25 |
+
+C:\Users\Jr\Desktop\retail-pos\components\LowStockAlert.tsx:26:5
+  24 |     }, [inventorySettings.lowStockAlert, storeId, dismissed]);
+  25 |
+> 26 |     const checkLowStock = async () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |         try {
+     | ^^^^^^^^^^^^^
+> 28 |             const products = await getProducts(storeId);
+     ΓÇª
+     | ^^^^^^^^^^^^^
+> 36 |         }
+     | ^^^^^^^^^^^^^
+> 37 |     };
+     | ^^^^^^^ `checkLowStock` is declared here
+  38 |
+  39 |     if (!inventorySettings.lowStockAlert || dismissed || lowStockProducts.length === 0) {
+  40 |         return null;  react-hooks/immutability
+  24:8   warning  React Hook useEffect has a missing dependency: 'checkLowStock'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react-hooks/exhaustive-deps
+  29:56  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\PaystackButton.tsx
+  42:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\ProductVariationDialog.tsx
+   9:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:62  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:85  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\ProtectedRoute.tsx
+  10:9   error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  25:11  warning  'hasPermission' is assigned a value but never used               @typescript-eslint/no-unused-vars
+  55:18  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\Jr\Desktop\retail-pos\components\ReceiptPrinter.tsx
+   8:11  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  19:17  error    Error: Cannot access variable before it is declared
+
+`handlePrint` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Jr\Desktop\retail-pos\components\ReceiptPrinter.tsx:19:17
+  17 |             // Auto print receipt if setting is enabled
+  18 |             setTimeout(() => {
+> 19 |                 handlePrint();
+     |                 ^^^^^^^^^^^ `handlePrint` accessed before it is declared
+  20 |             }, 1000);
+  21 |         }
+  22 |     }, [sale, posSettings.autoReceiptPrint]);
+
+C:\Users\Jr\Desktop\retail-pos\components\ReceiptPrinter.tsx:24:5
+  22 |     }, [sale, posSettings.autoReceiptPrint]);
+  23 |
+> 24 |     const handlePrint = () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |         if (posSettings.soundEffects) {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |             // Play print sound effect
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 41 |         onPrintComplete?.();
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |     };
+     | ^^^^^^^ `handlePrint` is declared here
+  43 |
+  44 |     const formatCurrency = (amount: number) => {
+  45 |         return new Intl.NumberFormat('en-US', {  react-hooks/immutability
+  22:8   warning  React Hook useEffect has a missing dependency: 'handlePrint'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/exhaustive-deps
+  76:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\components\SaleDetailsDialog.tsx
+  27:7  error    Error: Cannot access variable before it is declared
+
+`loadSaleDetails` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Jr\Desktop\retail-pos\components\SaleDetailsDialog.tsx:27:7
+  25 |   useEffect(() => {
+  26 |     if (saleId && open) {
+> 27 |       loadSaleDetails();
+     |       ^^^^^^^^^^^^^^^ `loadSaleDetails` accessed before it is declared
+  28 |     }
+  29 |   }, [saleId, open]);
+  30 |
+
+C:\Users\Jr\Desktop\retail-pos\components\SaleDetailsDialog.tsx:31:3
+  29 |   }, [saleId, open]);
+  30 |
+> 31 |   const loadSaleDetails = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 32 |     if (!saleId) return;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^
+> 33 |     setLoading(true);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^
+> 34 |     const saleData = await getSaleDetails(saleId);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^
+> 35 |     setSale(saleData);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^
+> 36 |     setLoading(false);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^
+> 37 |   };
+     | ^^^^^ `loadSaleDetails` is declared here
+  38 |
+  39 |   const handleRefund = async () => {
+  40 |     if (!sale) return;  react-hooks/immutability
+  29:6  warning  React Hook useEffect has a missing dependency: 'loadSaleDetails'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx
+   47:15  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+   79:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:79:22
+  77 |                 </CardHeader>
+  78 |                 <CardContent className="space-y-3">
+> 79 |                     <SettingItem
+     |                      ^^^^^^^^^^^ This component is created during render
+  80 |                         icon={Receipt}
+  81 |                         label="Auto Receipt Print"
+  82 |                         enabled={posSettings.autoReceiptPrint}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                         react-hooks/static-components
+   84:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:84:22
+  82 |                         enabled={posSettings.autoReceiptPrint}
+  83 |                     />
+> 84 |                     <SettingItem
+     |                      ^^^^^^^^^^^ This component is created during render
+  85 |                         icon={Package}
+  86 |                         label="Show Item Images"
+  87 |                         enabled={posSettings.showItemImages}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                         react-hooks/static-components
+   89:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:89:22
+  87 |                         enabled={posSettings.showItemImages}
+  88 |                     />
+> 89 |                     <SettingItem
+     |                      ^^^^^^^^^^^ This component is created during render
+  90 |                         icon={DollarSign}
+  91 |                         label="Quick Pay"
+  92 |                         enabled={posSettings.quickPayEnabled}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                              react-hooks/static-components
+   94:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:94:22
+  92 |                         enabled={posSettings.quickPayEnabled}
+  93 |                     />
+> 94 |                     <SettingItem
+     |                      ^^^^^^^^^^^ This component is created during render
+  95 |                         icon={DollarSign}
+  96 |                         label="Tax Rate"
+  97 |                         value={`${(posSettings.defaultTaxRate * 100).toFixed(1)}%`}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                        react-hooks/static-components
+   99:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:99:22
+   97 |                         value={`${(posSettings.defaultTaxRate * 100).toFixed(1)}%`}
+   98 |                     />
+>  99 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  100 |                         icon={Percent}
+  101 |                         label="Allow Discounts"
+  102 |                         enabled={posSettings.allowDiscounts}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">              react-hooks/static-components
+  105:26  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:105:26
+  103 |                     />
+  104 |                     {posSettings.allowDiscounts && (
+> 105 |                         <SettingItem
+      |                          ^^^^^^^^^^^ This component is created during render
+  106 |                             icon={Percent}
+  107 |                             label="Max Discount"
+  108 |                             value={`${posSettings.maxDiscountPercent}%`}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                   react-hooks/static-components
+  111:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:111:22
+  109 |                         />
+  110 |                     )}
+> 111 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  112 |                         icon={Users}
+  113 |                         label="Require Customer Info"
+  114 |                         enabled={posSettings.requireCustomerInfo}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                                             react-hooks/static-components
+  116:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:116:22
+  114 |                         enabled={posSettings.requireCustomerInfo}
+  115 |                     />
+> 116 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  117 |                         icon={Scan}
+  118 |                         label="Barcode Scanning"
+  119 |                         enabled={posSettings.barcodeScanning}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                react-hooks/static-components
+  121:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:121:22
+  119 |                         enabled={posSettings.barcodeScanning}
+  120 |                     />
+> 121 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  122 |                         icon={Users}
+  123 |                         label="Loyalty Program"
+  124 |                         enabled={posSettings.loyaltyProgram}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                     react-hooks/static-components
+  138:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:138:22
+  136 |                 </CardHeader>
+  137 |                 <CardContent className="space-y-3">
+> 138 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  139 |                         icon={AlertTriangle}
+  140 |                         label="Low Stock Alerts"
+  141 |                         enabled={inventorySettings.lowStockAlert}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                          react-hooks/static-components
+  144:26  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:144:26
+  142 |                     />
+  143 |                     {inventorySettings.lowStockAlert && (
+> 144 |                         <SettingItem
+      |                          ^^^^^^^^^^^ This component is created during render
+  145 |                             icon={AlertTriangle}
+  146 |                             label="Low Stock Threshold"
+  147 |                             value={inventorySettings.lowStockThreshold}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">  react-hooks/static-components
+  150:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:150:22
+  148 |                         />
+  149 |                     )}
+> 150 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  151 |                         icon={Package}
+  152 |                         label="Auto Reorder"
+  153 |                         enabled={inventorySettings.autoReorder}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                                                      react-hooks/static-components
+  156:26  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:156:26
+  154 |                     />
+  155 |                     {inventorySettings.autoReorder && (
+> 156 |                         <SettingItem
+      |                          ^^^^^^^^^^^ This component is created during render
+  157 |                             icon={Package}
+  158 |                             label="Reorder Point"
+  159 |                             value={inventorySettings.reorderPoint}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                     react-hooks/static-components
+  162:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:162:22
+  160 |                         />
+  161 |                     )}
+> 162 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  163 |                         icon={AlertTriangle}
+  164 |                         label="Track Expiry"
+  165 |                         enabled={inventorySettings.trackExpiry}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                                                                react-hooks/static-components
+  167:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:167:22
+  165 |                         enabled={inventorySettings.trackExpiry}
+  166 |                     />
+> 167 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  168 |                         icon={Package}
+  169 |                         label="Batch Tracking"
+  170 |                         enabled={inventorySettings.batchTracking}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">                             react-hooks/static-components
+  172:22  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:172:22
+  170 |                         enabled={inventorySettings.batchTracking}
+  171 |                     />
+> 172 |                     <SettingItem
+      |                      ^^^^^^^^^^^ This component is created during render
+  173 |                         icon={Scan}
+  174 |                         label="Serial Number Tracking"
+  175 |                         enabled={inventorySettings.serialNumberTracking}
+
+C:\Users\Jr\Desktop\retail-pos\components\SettingsSummary.tsx:41:25
+  39 |     );
+  40 |
+> 41 |     const SettingItem = ({ 
+     |                         ^^^
+> 42 |         icon: Icon, 
+     | ^^^^^^^^^^^^^^^^^^^^
+> 43 |         label, 
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^
+> 65 |         </div>
+     | ^^^^^^^^^^^^^^^^^^^^
+> 66 |     );
+     | ^^^^^^ The component is created during render here
+  67 |
+  68 |     return (
+  69 |         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">               react-hooks/static-components
+
+C:\Users\Jr\Desktop\retail-pos\components\SocialMediaClient.tsx
+   28:46  error    Unexpected any. Specify a different type                                                                           @typescript-eslint/no-explicit-any
+   35:6   warning  React Hook useEffect has a missing dependency: 'fetchAnalytics'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   48:9   warning  'generateProductPromotion' is assigned a value but never used                                                      @typescript-eslint/no-unused-vars
+   60:14  warning  'error' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+   79:14  warning  'error' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+   91:39  error    Unexpected any. Specify a different type                                                                           @typescript-eslint/no-explicit-any
+  102:14  warning  'error' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\components\ui\sidebar.tsx
+  611:26  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\Jr\Desktop\retail-pos\components\ui\sidebar.tsx:611:26
+  609 |   // Random width between 50 to 90%.
+  610 |   const width = React.useMemo(() => {
+> 611 |     return `${Math.floor(Math.random() * 40) + 50}%`
+      |                          ^^^^^^^^^^^^^ Cannot call impure function
+  612 |   }, [])
+  613 |
+  614 |   return (  react-hooks/purity
+
+C:\Users\Jr\Desktop\retail-pos\components\ui\textarea.tsx
+  5:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+C:\Users\Jr\Desktop\retail-pos\hooks\use-subscription-handler.ts
+  10:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\auth.actions.ts
+   11:10   warning  'Types' is defined but never used         @typescript-eslint/no-unused-vars
+   81:45   error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  157:102  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\category.actions.ts
+  18:100  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\customer.actions.ts
+   12:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   24:67  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   30:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   34:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   71:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  115:69  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  135:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\dashboard.actions.ts
+  117:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\inventory.actions.ts
+   17:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   35:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   55:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  137:100  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  158:56   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\notification.actions.ts
+   17:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   57:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   97:60  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  111:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  112:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\offline.actions.ts
+   11:116  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   36:58   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   89:89   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   90:87   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   91:87   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  109:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\pos-settings.actions.ts
+  5:10  warning  'Types' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\product.actions.ts
+  22:98   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  33:116  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\report.actions.ts
+  143:54  warning  'dateRange' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\sale.actions.ts
+   17:19  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+   31:39  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+   71:12  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+   81:12  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+   98:10  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  104:10  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  110:10  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  179:10  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  201:10  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  214:72  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  223:16  warning  'customerError' is defined but never used  @typescript-eslint/no-unused-vars
+  230:19  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  254:55  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  281:10  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  302:85  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  324:55  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  340:39  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  348:16  warning  'customerError' is defined but never used  @typescript-eslint/no-unused-vars
+  371:12  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\settings.actions.ts
+  24:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\social-media.actions.ts
+   30:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   80:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  141:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\staff.actions.ts
+   16:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   32:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   38:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  122:85  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\actions\supplier.actions.ts
+   13:58   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   65:106  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   86:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  121:10   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\contexts\SettingsContext.tsx
+  100:8  warning  React Hook useEffect has a missing dependency: 'refreshSettings'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Jr\Desktop\retail-pos\lib\hooks\usePermissions.ts
+  20:35  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-explicit-any
+  22:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Jr\Desktop\retail-pos\lib\hooks\usePermissions.ts:22:9
+  20 |       const userData = (window as any).__USER_DATA__;
+  21 |       if (userData) {
+> 22 |         setCurrentUser(userData);
+     |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  23 |       }
+  24 |     }
+  25 |   }, [user, currentUser]);  react-hooks/set-state-in-effect
+
+C:\Users\Jr\Desktop\retail-pos\lib\mongoose.ts
+  7:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\paystack.ts
+  2:7  warning  'PAYSTACK_PUBLIC_KEY' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\lib\stores\cart-store.ts
+  24:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\types.d.ts
+  229:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  250:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\utils\auth.ts
+  35:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Jr\Desktop\retail-pos\lib\utils\inventory-alerts.ts
+   16:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   17:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   94:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  150:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\utils\offline-sales.ts
+  6:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\utils\settings-validator.ts
+    1:10  warning  'toast' is defined but never used         @typescript-eslint/no-unused-vars
+   12:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   44:28  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   63:28  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   75:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   89:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:28  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  123:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  130:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\utils\sounds.ts
+  7:66  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Jr\Desktop\retail-pos\lib\utils\subscription-wrapper.ts
+   4:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   8:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  21:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  37:70  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  55:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 268 problems (186 errors, 82 warnings)
+

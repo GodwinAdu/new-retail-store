@@ -111,16 +111,16 @@ export default function EditProductDialog({ product, storeId, categories, open, 
       
       const result = await updateProduct(storeId, product._id, productData);
       
-      if (result) {
+      if (result?.success) {
         toast.success("Product updated successfully");
         onOpenChange(false);
         onProductUpdated();
       } else {
-        toast.error("Failed to update product");
+        toast.error(result?.error || "Failed to update product");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Update product error:", error);
-      toast.error("Failed to update product");
+      toast.error(error.message || "Failed to update product");
     } finally {
       setLoading(false);
     }

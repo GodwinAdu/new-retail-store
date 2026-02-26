@@ -58,9 +58,8 @@ export const createCustomer = withSubscriptionCheckByStoreId(async (storeId: str
   try {
     await connectToDB();
     
-    // Validate ObjectId format for storeId
     if (!mongoose.Types.ObjectId.isValid(storeId)) {
-      return null;
+      return { success: false, error: "Invalid store ID" };
     }
     
     const customer = await Customer.create({
@@ -69,10 +68,10 @@ export const createCustomer = withSubscriptionCheckByStoreId(async (storeId: str
       loyaltyPoints: 0,
       totalPurchases: 0
     } as any);
-    return JSON.parse(JSON.stringify(customer));
-  } catch (error) {
+    return { success: true, data: JSON.parse(JSON.stringify(customer)) };
+  } catch (error: any) {
     console.error("Error creating customer:", error);
-    return null;
+    return { success: false, error: error.message || "Failed to create customer" };
   }
 });
 

@@ -1,4 +1,4 @@
-import { Document, Schema } from "mongoose";
+import { Document, Schema, Types } from "mongoose";
 
 // User Types
 export interface IUser extends Document {
@@ -11,7 +11,7 @@ export interface IUser extends Document {
   role: string;
   avatarUrl?: string;
   isActive: boolean;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   isVerified: boolean;
   lastLogin?: Date;
   createdAt: Date;
@@ -23,7 +23,7 @@ export interface IStore extends Document {
   _id: string;
   name: string;
   avatar?: string;
-  owner: Schema.Types.ObjectId;
+  owner: Types.ObjectId;
   storeEmail: string;
   storePhone?: string;
   storeAddress?: string;
@@ -75,8 +75,8 @@ export interface IStore extends Document {
 
 // Branch Types
 export interface IBranch extends Document {
-  _id: Schema.Types.ObjectId;
-  storeId: Schema.Types.ObjectId;
+  _id: Types.ObjectId;
+  storeId: Types.ObjectId;
   name: string;
   address?: string;
   manager?: string;
@@ -120,7 +120,7 @@ export interface IBranch extends Document {
 // Category Types
 export interface ICategory extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   name: string;
   description?: string;
   isActive: boolean;
@@ -132,14 +132,14 @@ export interface ICategory extends Document {
 // Supplier Types
 export interface ISupplier extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   name: string;
   contact?: string;
   email?: string;
   phone?: string;
   address?: string;
   isActive: boolean;
-  products: Schema.Types.ObjectId[];
+  products: Types.ObjectId[];
   paymentTerms?: string;
   notes?: string;
   createdAt: Date;
@@ -149,8 +149,8 @@ export interface ISupplier extends Document {
 // Product Types
 export interface IProduct extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
-  categoryId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
+  categoryId: Types.ObjectId;
   name: string;
   description?: string;
   price: number;
@@ -184,8 +184,8 @@ export interface IProduct extends Document {
 
 // Customer Types
 export interface ICustomer extends Document {
-  _id:string;
-  storeId: Schema.Types.ObjectId;
+  _id: string;
+  storeId: Types.ObjectId;
   name: string;
   email?: string;
   phone?: string;
@@ -195,12 +195,13 @@ export interface ICustomer extends Document {
   lastVisit?: Date;
   createdAt: Date;
   updatedAt: Date;
+  branchId?: Types.ObjectId;
 }
 
 // Social Media Types
 export interface ISocialPost extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   platform: 'facebook' | 'instagram' | 'twitter' | 'whatsapp';
   content: string;
   mediaUrls: string[];
@@ -214,59 +215,62 @@ export interface ISocialPost extends Document {
     comments: number;
     reach: number;
   };
-  relatedProductIds: Schema.Types.ObjectId[];
-  relatedSaleIds: Schema.Types.ObjectId[];
+  relatedProductIds: Types.ObjectId[];
+  relatedSaleIds: Types.ObjectId[];
   errorMessage?: string;
   createdAt: Date;
   updatedAt: Date;
+  branchId?: Types.ObjectId;
 }
 
 // Offline Sale Types
 export interface IOfflineSale extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   localId: string;
   saleData: any;
   status: 'pending' | 'synced' | 'failed';
   syncAttempts: number;
   lastSyncAttempt?: Date;
-  syncedSaleId?: Schema.Types.ObjectId;
+  syncedSaleId?: Types.ObjectId;
   errorMessage?: string;
   deviceId?: string;
   createdAt: Date;
   updatedAt: Date;
+  branchId?: Types.ObjectId;
 }
 
 // Notification Types
 export interface INotification extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   type: 'sms' | 'email' | 'push';
   recipient: string;
   subject?: string;
   message: string;
   status: 'pending' | 'sent' | 'failed' | 'delivered';
-  relatedSaleId?: Schema.Types.ObjectId;
+  relatedSaleId?: Types.ObjectId;
   metadata?: any;
   sentAt?: Date;
   deliveredAt?: Date;
   errorMessage?: string;
   createdAt: Date;
   updatedAt: Date;
+  branchId?: Types.ObjectId;
 }
 
 // Sale Types
 export interface ISale extends Document {
   _id: string;
-  storeId: Schema.Types.ObjectId;
+  storeId: Types.ObjectId;
   saleNumber: string;
-  customerId?: Schema.Types.ObjectId;
+  customerId?: Types.ObjectId;
   customerName?: string;
   customerPhone?: string;
   saleType: 'in-store' | 'online' | 'phone';
   status: 'pending' | 'completed' | 'cancelled' | 'refunded';
   items: {
-    productId: Schema.Types.ObjectId;
+    productId: Types.ObjectId;
     name: string;
     price: number;
     quantity: number;
@@ -285,4 +289,5 @@ export interface ISale extends Document {
   cashierId?: Schema.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
+  branchId?: Schema.Types.ObjectId;
 }

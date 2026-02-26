@@ -33,19 +33,19 @@ export default function AddCustomerDialog({ storeId, onCustomerAdded }: AddCusto
 
     setLoading(true);
     try {
-      const customer = await createCustomer(storeId, formData);
+      const result = await createCustomer(storeId, formData);
       
-      if (customer) {
+      if (result?.success) {
         toast.success("Customer added successfully");
         setOpen(false);
         setFormData({ name: "", email: "", phone: "", address: "" });
         onCustomerAdded?.();
       } else {
-        toast.error("Failed to add customer");
+        toast.error(result?.error || "Failed to add customer");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Add customer error:", error);
-      toast.error("Failed to add customer");
+      toast.error(error.message || "Failed to add customer");
     } finally {
       setLoading(false);
     }

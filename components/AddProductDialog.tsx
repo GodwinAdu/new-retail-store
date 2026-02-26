@@ -92,7 +92,7 @@ export default function AddProductDialog({ storeId, onProductAdded }: AddProduct
       return await createProduct(storeId, productData);
     }, "Failed to add product");
     
-    if (result) {
+    if (result?.success) {
       toast.success("Product added successfully");
       setOpen(false);
       setFormData({
@@ -114,6 +114,8 @@ export default function AddProductDialog({ storeId, onProductAdded }: AddProduct
         variations: []
       });
       onProductAdded?.();
+    } else {
+      toast.error(result?.error || "Failed to add product");
     }
     
     setLoading(false);

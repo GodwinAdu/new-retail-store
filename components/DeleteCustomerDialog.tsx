@@ -22,18 +22,18 @@ export default function DeleteCustomerDialog({ customer, open, onOpenChange, onC
 
     setLoading(true);
     try {
-      const result = await deleteCustomer(customer._id);
-      
+      const result = await deleteCustomer(customer.storeId.toString(), customer._id);
+
       if (result.success) {
         toast.success("Customer deleted successfully");
         onOpenChange(false);
         onCustomerDeleted?.();
       } else {
-        toast.error("Failed to delete customer");
+        toast.error(result.error || "Failed to delete customer");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Delete customer error:", error);
-      toast.error("Failed to delete customer");
+      toast.error(error.message || "Failed to delete customer");
     } finally {
       setLoading(false);
     }
@@ -52,10 +52,10 @@ export default function DeleteCustomerDialog({ customer, open, onOpenChange, onC
           <Button variant="outline" onClick={() => onOpenChange(false)} className="flex-1">
             Cancel
           </Button>
-          <Button 
-            variant="destructive" 
-            onClick={handleDelete} 
-            disabled={loading} 
+          <Button
+            variant="destructive"
+            onClick={handleDelete}
+            disabled={loading}
             className="flex-1"
           >
             {loading ? "Deleting..." : "Delete"}

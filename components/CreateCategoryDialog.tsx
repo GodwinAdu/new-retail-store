@@ -38,19 +38,19 @@ export default function CreateCategoryDialog({ storeId, onCategoryCreated }: Cre
 
     setLoading(true);
     try {
-      const category = await createCategory(storeId, formData);
+      const result = await createCategory(storeId, formData);
       
-      if (category) {
+      if (result?.success) {
         toast.success("Category created successfully");
         setOpen(false);
         setFormData({ name: "", description: "", color: colors[0] });
         onCategoryCreated?.();
       } else {
-        toast.error("Failed to create category");
+        toast.error(result?.error || "Failed to create category");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Create category error:", error);
-      toast.error("Failed to create category");
+      toast.error(error.message || "Failed to create category");
     } finally {
       setLoading(false);
     }

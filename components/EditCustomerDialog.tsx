@@ -45,18 +45,18 @@ export default function EditCustomerDialog({ customer, open, onOpenChange, onCus
 
     setLoading(true);
     try {
-      const result = await updateCustomer(customer._id, formData);
-      
+      const result = await updateCustomer(customer.storeId.toString(), customer._id, formData);
+
       if (result.success) {
         toast.success("Customer updated successfully");
         onOpenChange(false);
         onCustomerUpdated?.();
       } else {
-        toast.error("Failed to update customer");
+        toast.error(result.error || "Failed to update customer");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Update customer error:", error);
-      toast.error("Failed to update customer");
+      toast.error(error.message || "Failed to update customer");
     } finally {
       setLoading(false);
     }

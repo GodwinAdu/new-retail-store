@@ -3,7 +3,8 @@
 import { connectToDB } from "../mongoose";
 import User from "../models/user.models";
 import { withSubscriptionCheckByStoreId } from "@/lib/utils/subscription-wrapper";
-import { Types } from "mongoose";
+import {hash} from "bcryptjs"
+
 
 export const getStaffMembers = withSubscriptionCheckByStoreId(async (storeId: string) => {
     try {
@@ -63,8 +64,8 @@ export const createStaffMember = withSubscriptionCheckByStoreId(async (storeId: 
             throw new Error("User with this email already exists");
         }
         
-        const bcrypt = require('bcryptjs');
-        const hashedPassword = await bcrypt.hash(data.password, 12);
+        
+        const hashedPassword = await hash(data.password, 12);
         
         const username = data.email.split('@')[0].toLowerCase();
         
@@ -80,7 +81,7 @@ export const createStaffMember = withSubscriptionCheckByStoreId(async (storeId: 
         });
         
         await newUser.save();
-        return newUser;
+        return  JSON.parse(JSON.stringify(newUser));
     } catch (error) {
         console.error("Error creating staff member:", error);
         throw new Error(error instanceof Error ? error.message : "Failed to create staff member");

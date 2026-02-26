@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Package, Search, Filter, Edit, Trash2, Download, Upload, AlertTriangle, TrendingUp, TrendingDown, ArrowLeft } from "lucide-react";
+import { Package, Search, Filter, Edit, Trash2, Download, Upload, AlertTriangle, TrendingUp, TrendingDown, ArrowLeft, Settings, BarChart3 } from "lucide-react";
 import Link from "next/link";
 import { usePermissions } from "@/lib/hooks/usePermissions";
 import { PERMISSIONS } from "@/lib/permissions";
@@ -10,10 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import AddProductDialog from "@/components/AddProductDialog";
 import EditProductDialog from "@/components/EditProductDialog";
+import BarcodeScanner from "@/components/BarcodeScanner";
 import { getProducts, deleteProduct } from "@/lib/actions/product.actions";
 import { getCategories } from "@/lib/actions/category.actions";
+import { bulkDeleteProducts, bulkUpdateCategory, adjustStock } from "@/lib/actions/inventory.actions";
 import { toast } from "sonner";
 import { useSettings } from "@/lib/contexts/SettingsContext";
 import { InventoryAlertManager } from "@/lib/utils/inventory-alerts";
@@ -35,6 +40,10 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
   const [sortOrder, setSortOrder] = useState("asc");
   const [editingProduct, setEditingProduct] = useState<any>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+  const [bulkActionOpen, setBulkActionOpen] = useState(false);
+  const [adjustStockOpen, setAdjustStockOpen] = useState(false);
+  const [adjustingProduct, setAdjustingProduct] = useState<any>(null);
 
   useEffect(() => {
     loadData();
@@ -65,12 +74,12 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
 
   const handleDeleteProduct = async (productId: string) => {
     if (confirm("Are you sure you want to delete this product?")) {
-      const success = await deleteProduct(storeId, productId);
-      if (success) {
+      const result = await deleteProduct(storeId, productId);
+      if (result?.success) {
         toast.success("Product deleted successfully");
         loadData();
       } else {
-        toast.error("Failed to delete product");
+        toast.error(result?.error || "Failed to delete product");
       }
     }
   };
@@ -260,6 +269,25 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
         <div className="flex space-x-2">
           {hasPermission(PERMISSIONS.MANAGE_INVENTORY) && (
             <>
+              <BarcodeScanner storeId={storeId} onProductFound={(product) => setSearchTerm(product.name)} />
+              <Link href={`/dashboard/${storeId}/inventory/reports`}>
+                <Button variant="outline">
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  Reports
+                </Button>
+              </Link>
+              <Link href={`/dashboard/${storeId}/inventory/purchase-orders`}>
+                <Button variant="outline">
+                  <Package className="w-4 h-4 mr-2" />
+                  Purchase Orders
+                </Button>
+              </Link>
+              <Link href={`/dashboard/${storeId}/inventory/stock-take`}>
+                <Button variant="outline">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Stock Take
+                </Button>
+              </Link>
               <input
                 type="file"
                 accept=".csv"
@@ -277,10 +305,7 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
               </label>
             </>
           )}
-          <Button
-            // className="border-white/20 text-white hover:bg-white/10"
-            onClick={handleExport}
-          >
+          <Button onClick={handleExport}>
             <Download className="w-4 h-4 mr-2" />
             Export
           </Button>

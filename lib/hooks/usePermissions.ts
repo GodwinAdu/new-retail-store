@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { hasPermission, hasAnyPermission, hasAllPermissions, type Permission, type Role } from "@/lib/permissions";
+import { hasPermission, hasAnyPermission, hasAllPermissions, type Permission, type Role, canAccessRole } from "@/lib/permissions";
 
 interface User {
   id: string;
@@ -31,6 +31,10 @@ export function usePermissions(user?: User) {
     hasPermission: (permission: Permission) => hasPermission(userRole, permission),
     hasAnyPermission: (permissions: Permission[]) => hasAnyPermission(userRole, permissions),
     hasAllPermissions: (permissions: Permission[]) => hasAllPermissions(userRole, permissions),
+    canAccessRole: (targetRole: Role) => {
+     
+      return canAccessRole(userRole, targetRole);
+    },
     isOwner: userRole === 'owner',
     isAdmin: userRole === 'admin',
     isManager: userRole === 'manager',

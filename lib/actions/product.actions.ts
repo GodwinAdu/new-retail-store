@@ -9,10 +9,17 @@ export const getProducts = withSubscriptionCheckByStoreId(async (storeId: string
   try {
     await connectToDB();
     const products = await Product.find({ storeId })
-      .populate({path:'categoryId',model:Category, select:'name'})
+      .populate({path:'categoryId', model:Category, select:'name color'})
       .lean();
-      console.log(products);
-    return JSON.parse(JSON.stringify(products));
+    
+    // Map categoryId to category for consistency
+    const productsWithCategory = products.map(product => ({
+      ...product,
+      category: product.categoryId,
+      categoryId: product.categoryId?._id
+    }));
+    
+    return JSON.parse(JSON.stringify(productsWithCategory));
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -23,10 +30,10 @@ export const createProduct = withSubscriptionCheckByStoreId(async (storeId: stri
   try {
     await connectToDB();
     const product = await Product.create({ ...productData, storeId });
-    return JSON.parse(JSON.stringify(product));
-  } catch (error) {
+    return { success: true, data: JSON.parse(JSON.stringify(product)) };
+  } catch (error: any) {
     console.error("Error creating product:", error);
-    return null;
+    return { success: false, error: error.message || "Failed to create product" };
   }
 });
 
@@ -38,21 +45,27 @@ export const updateProduct = withSubscriptionCheckByStoreId(async (storeId: stri
       updateData, 
       { new: true }
     );
-    return JSON.parse(JSON.stringify(product));
-  } catch (error) {
+    if (!product) {
+      return { success: false, error: "Product not found" };
+    }
+    return { success: true, data: JSON.parse(JSON.stringify(product)) };
+  } catch (error: any) {
     console.error("Error updating product:", error);
-    return null;
+    return { success: false, error: error.message || "Failed to update product" };
   }
 });
 
 export const deleteProduct = withSubscriptionCheckByStoreId(async (storeId: string, productId: string) => {
   try {
     await connectToDB();
-    await Product.findOneAndDelete({ _id: productId, storeId });
-    return true;
-  } catch (error) {
+    const result = await Product.findOneAndDelete({ _id: productId, storeId });
+    if (!result) {
+      return { success: false, error: "Product not found" };
+    }
+    return { success: true };
+  } catch (error: any) {
     console.error("Error deleting product:", error);
-    return false;
+    return { success: false, error: error.message || "Failed to delete product" };
   }
 });
 

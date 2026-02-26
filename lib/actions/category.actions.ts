@@ -19,20 +19,23 @@ export const createCategory = withSubscriptionCheckByStoreId(async (storeId: str
   try {
     await connectToDB();
     const category = await Category.create({ ...categoryData, store: storeId });
-    return JSON.parse(JSON.stringify(category));
-  } catch (error) {
+    return { success: true, data: JSON.parse(JSON.stringify(category)) };
+  } catch (error: any) {
     console.error("Error creating category:", error);
-    return null;
+    return { success: false, error: error.message || "Failed to create category" };
   }
 });
 
 export const deleteCategory = withSubscriptionCheckByStoreId(async (storeId: string, categoryId: string) => {
   try {
     await connectToDB();
-    await Category.findOneAndDelete({ _id: categoryId, store: storeId });
-    return true;
-  } catch (error) {
+    const result = await Category.findOneAndDelete({ _id: categoryId, store: storeId });
+    if (!result) {
+      return { success: false, error: "Category not found" };
+    }
+    return { success: true };
+  } catch (error: any) {
     console.error("Error deleting category:", error);
-    return false;
+    return { success: false, error: error.message || "Failed to delete category" };
   }
 });

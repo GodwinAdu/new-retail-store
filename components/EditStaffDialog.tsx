@@ -38,7 +38,7 @@ export default function EditStaffDialog({ staff }: EditStaffDialogProps) {
         setLoading(true);
 
         try {
-            await updateStaffMember(staff._id, formData);
+            await updateStaffMember(staff.storeId.toString(), staff._id, formData);
             setOpen(false);
             router.refresh();
         } catch (error) {
@@ -66,7 +66,7 @@ export default function EditStaffDialog({ staff }: EditStaffDialogProps) {
                         <Input
                             id="fullName"
                             value={formData.fullName}
-                            onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                             className="bg-slate-800 border-slate-600 text-white"
                             required
                         />
@@ -77,7 +77,7 @@ export default function EditStaffDialog({ staff }: EditStaffDialogProps) {
                             id="email"
                             type="email"
                             value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             className="bg-slate-800 border-slate-600 text-white"
                             required
                         />
@@ -87,13 +87,13 @@ export default function EditStaffDialog({ staff }: EditStaffDialogProps) {
                         <Input
                             id="phone"
                             value={formData.phone}
-                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             className="bg-slate-800 border-slate-600 text-white"
                         />
                     </div>
                     <div>
                         <Label htmlFor="role">Role</Label>
-                        <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
+                        <Select value={formData.role} onValueChange={(value) => setFormData({ ...formData, role: value })}>
                             <SelectTrigger className="bg-slate-800 border-slate-600 text-white">
                                 <SelectValue />
                             </SelectTrigger>
@@ -107,7 +107,7 @@ export default function EditStaffDialog({ staff }: EditStaffDialogProps) {
                     </div>
                     <div>
                         <Label htmlFor="status">Status</Label>
-                        <Select value={formData.isActive.toString()} onValueChange={(value) => setFormData({...formData, isActive: value === 'true'})}>
+                        <Select value={formData.isActive.toString()} onValueChange={(value) => setFormData({ ...formData, isActive: value === 'true' })}>
                             <SelectTrigger className="bg-slate-800 border-slate-600 text-white">
                                 <SelectValue />
                             </SelectTrigger>

@@ -61,19 +61,30 @@ export default function SuppliersClient({ storeId }: { storeId: string; }) {
     e.preventDefault();
     try {
       const { createSupplier, updateSupplier } = await import("@/lib/actions/supplier.actions");
+      let result;
       if (editingSupplier) {
-        await updateSupplier(storeId, editingSupplier._id, formData);
-        toast.success("Supplier updated successfully");
+        result = await updateSupplier(storeId, editingSupplier._id, formData);
+        if (result?.success) {
+          toast.success("Supplier updated successfully");
+        } else {
+          toast.error(result?.error || "Failed to update supplier");
+          return;
+        }
       } else {
-        await createSupplier(storeId, formData);
-        toast.success("Supplier created successfully");
+        result = await createSupplier(storeId, formData);
+        if (result?.success) {
+          toast.success("Supplier created successfully");
+        } else {
+          toast.error(result?.error || "Failed to create supplier");
+          return;
+        }
       }
       setIsDialogOpen(false);
       setEditingSupplier(null);
       resetForm();
       fetchSuppliers();
-    } catch (error) {
-      toast.error("Failed to save supplier");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to save supplier");
     }
   };
 
@@ -95,11 +106,15 @@ export default function SuppliersClient({ storeId }: { storeId: string; }) {
     if (confirm("Are you sure you want to delete this supplier?")) {
       try {
         const { deleteSupplier } = await import("@/lib/actions/supplier.actions");
-        await deleteSupplier(storeId, supplierId);
-        toast.success("Supplier deleted successfully");
-        fetchSuppliers();
-      } catch (error) {
-        toast.error("Failed to delete supplier");
+        const result = await deleteSupplier(storeId, supplierId);
+        if (result?.success) {
+          toast.success("Supplier deleted successfully");
+          fetchSuppliers();
+        } else {
+          toast.error(result?.error || "Failed to delete supplier");
+        }
+      } catch (error: any) {
+        toast.error(error.message || "Failed to delete supplier");
       }
     }
   };

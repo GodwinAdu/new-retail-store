@@ -9,6 +9,11 @@ import User from "../models/user.models";
 import Store from "../models/store.models";
 import { generateUniqueUsername } from "../helpers/generate-username";
 import { Types } from "mongoose";
+import { validatePassword, validateEmail, sanitizeInput } from "../utils/validation";
+import { validateTokenSecretKey } from "../utils/env-validation";
+
+// Validate environment on module load
+validateTokenSecretKey();
 
 const SECRET_KEY = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY!);
 
@@ -36,14 +41,40 @@ export async function signUp(data: SignUpData) {
         
         await connectToDB();
 
+        // Validate email format
+        if (!validateEmail(data.email)) {
+            throw new Error("Invalid email format");
+        }
+
+        if (!validateEmail(data.storeEmail)) {
+            throw new Error("Invalid store email format");
+        }
+
+        // Validate password strength
+        const passwordValidation = validatePassword(data.password);
+        if (!passwordValidation.isValid) {
+            throw new Error(passwordValidation.errors.join('. '));
+        }
+
+        // Sanitize inputs
+        const sanitizedData = {
+            fullName: sanitizeInput(data.fullName),
+            email: data.email.toLowerCase().trim(),
+            storeName: sanitizeInput(data.storeName),
+            storeEmail: data.storeEmail.toLowerCase().trim(),
+            storePhone: data.storePhone ? sanitizeInput(data.storePhone) : undefined,
+            storeAddress: data.storeAddress ? sanitizeInput(data.storeAddress) : undefined,
+            phoneNumber: data.phoneNumber ? sanitizeInput(data.phoneNumber) : undefined,
+        };
+
         // Check if user already exists
-        const existingUser = await User.findOne({ email: data.email });
+        const existingUser = await User.findOne({ email: sanitizedData.email });
         if (existingUser) {
             throw new Error("User with this email already exists");
         }
 
         // Check if store email already exists
-        const existingStore = await Store.findOne({ storeEmail: data.storeEmail });
+        const existingStore = await Store.findOne({ storeEmail: sanitizedData.storeEmail });
         if (existingStore) {
             throw new Error("Store with this email already exists");
         }
@@ -53,10 +84,10 @@ export async function signUp(data: SignUpData) {
 
         // Create store first
         const store = new Store({
-            name: data.storeName,
-            storeEmail: data.storeEmail,
-            storePhone: data.storePhone,
-            storeAddress: data.storeAddress,
+            name: sanitizedData.storeName,
+            storeEmail: sanitizedData.storeEmail,
+            storePhone: sanitizedData.storePhone,
+            storeAddress: sanitizedData.storeAddress,
             owner: null, // Will be set after user creation
         });
 
@@ -64,10 +95,10 @@ export async function signUp(data: SignUpData) {
 
         // Create user as owner
         const user = new User({
-            username: generateUniqueUsername(data.fullName),
-            fullName: data.fullName,
-            email: data.email,
-            phoneNumber: data.phoneNumber,
+            username: generateUniqueUsername(sanitizedData.fullName),
+            fullName: sanitizedData.fullName,
+            email: sanitizedData.email,
+            phoneNumber: sanitizedData.phoneNumber,
             password: hashedPassword,
             role: 'owner',
             storeId: savedStore._id,

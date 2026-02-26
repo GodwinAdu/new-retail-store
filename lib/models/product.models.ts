@@ -26,6 +26,12 @@ const ProductSchema: Schema<IProduct> = new Schema(
             required: true,
             min: 0,
         },
+        costPrice: {
+            type: Number,
+            required: true,
+            min: 0,
+            default: 0,
+        },
         image: {
             type: String,
             default: null,
