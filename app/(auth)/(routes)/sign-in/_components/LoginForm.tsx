@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { signIn } from "@/lib/actions/auth.actions";
+import { toast } from "sonner";
 
 export default function LoginForm() {
     const router = useRouter();
@@ -38,9 +39,11 @@ export default function LoginForm() {
             const result = await signIn(formData);
             if (result.success) {
                 router.push(result.redirectUrl);
+                toast.success("Login successful! Redirecting..." )
             }
         } catch (error: any) {
             setError(error.message || "An error occurred during login");
+            toast.error(error.message || "An error occurred during login");
         } finally {
             setIsLoading(false);
         }

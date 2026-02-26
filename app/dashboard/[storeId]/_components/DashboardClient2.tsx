@@ -19,7 +19,8 @@ import {
     Target,
     LogOut,
     CreditCard,
-    Store
+    Store,
+    MessageSquare
 } from "lucide-react";
 import { usePermissions } from "@/lib/hooks/usePermissions";
 import { PERMISSIONS } from "@/lib/permissions";
@@ -620,10 +621,10 @@ export default function DashboardClient({ params, user }: DashboardClientProps) 
                                         </Button>
                                     </Link>
                                 )}
-                                <Link href={`/dashboard/${params.storeId}/marketing`}>
+                                <Link href={`/dashboard/${params.storeId}/marketing/sms`}>
                                     <Button variant="outline" className="w-full h-16 flex-col space-y-2 hover:bg-pink-50 hover:border-pink-200">
-                                        <TrendingUp className="w-5 h-5" />
-                                        <span className="text-xs">Marketing</span>
+                                        <MessageSquare className="w-5 h-5" />
+                                        <span className="text-xs">SMS</span>
                                     </Button>
                                 </Link>
                             </div>
