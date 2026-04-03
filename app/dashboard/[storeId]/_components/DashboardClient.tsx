@@ -91,9 +91,9 @@ export default function DashboardClient({ params, user }: DashboardClientProps) 
 
     if (loading || !dashboardData) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-600">Loading dashboard...</p>
                 </div>
             </div>
@@ -101,13 +101,13 @@ export default function DashboardClient({ params, user }: DashboardClientProps) 
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
             {/* Modern Header */}
             <div className="bg-white/80 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-4">
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
                                 <ShoppingCart className="w-6 h-6 text-white" />
                             </div>
                             <div>
@@ -158,7 +158,7 @@ export default function DashboardClient({ params, user }: DashboardClientProps) 
                                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
                             </Button>
                             <Link href={`/dashboard/${params.storeId}/pos`}>
-                                <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                                <Button className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600">
                                     <ShoppingCart className="w-4 h-4 mr-2" />
                                     Open POS
                                 </Button>
@@ -351,7 +351,7 @@ export default function DashboardClient({ params, user }: DashboardClientProps) 
                                 {dashboardData.popularProducts.length > 0 ? dashboardData.popularProducts.map((product: any, index: number) => (
                                     <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-white/50 to-gray-50/50 rounded-xl border border-white/30">
                                         <div className="flex items-center space-x-4">
-                                            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold">
+                                            <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-xl flex items-center justify-center text-white font-bold">
                                                 {index + 1}
                                             </div>
                                             <div>

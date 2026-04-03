@@ -8,11 +8,7 @@ const OfflineSaleSchema: Schema<IOfflineSale> = new Schema(
             ref: "Store",
             required: true,
         },
-        branchId: {
-            type: Schema.Types.ObjectId,
-            ref: "Branch",
-            required: true,
-        },
+
         localId: {
             type: String,
             required: true,

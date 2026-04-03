@@ -55,9 +55,9 @@ export default function BillingClient({  user }: BillingClientProps) {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-emerald-300 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-300">Loading billing information...</p>
                 </div>
             </div>
@@ -65,9 +65,9 @@ export default function BillingClient({  user }: BillingClientProps) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
             {/* Header */}
-            <div className="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
+            <div className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
@@ -77,11 +77,11 @@ export default function BillingClient({  user }: BillingClientProps) {
                                     Back to Dashboard
                                 </Button>
                             </Link>
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center">
+                            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
                                 <CreditCard className="w-6 h-6 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold text-white">Billing & Subscription</h1>
+                                <h1 className="text-2xl font-bold text-gray-900">Billing & Subscription</h1>
                                 <p className="text-gray-300">Manage your monthly subscription</p>
                             </div>
                         </div>
@@ -93,31 +93,31 @@ export default function BillingClient({  user }: BillingClientProps) {
             <div className="max-w-4xl mx-auto px-6 py-8">
                 {/* Current Bill */}
                 <motion.div 
-                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 shadow-lg mb-8"
+                    className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 shadow-lg mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
                     <div className="text-center mb-8">
                         {billingInfo?.status === 'trial' ? (
                             <>
-                                <h2 className="text-3xl font-bold text-green-400 mb-2">
+                                <h2 className="text-3xl font-bold text-emerald-600 mb-2">
                                     Free Trial
                                 </h2>
                                 <p className="text-gray-300">30-Day Free Trial Active</p>
-                                <p className="text-sm text-gray-400 mt-2">
+                                <p className="text-sm text-gray-500 mt-2">
                                     Trial ends: {billingInfo?.trialEndsAt ? new Date(billingInfo.trialEndsAt).toLocaleDateString() : 'N/A'}
                                 </p>
-                                <p className="text-sm text-blue-400 mt-1">
+                                <p className="text-sm text-emerald-600 mt-1">
                                     After trial: {billingInfo?.currency}{billingInfo?.monthlyTotal}/month
                                 </p>
                             </>
                         ) : (
                             <>
-                                <h2 className="text-3xl font-bold text-white mb-2">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-2">
                                     {billingInfo?.currency}{billingInfo?.monthlyTotal}
                                 </h2>
                                 <p className="text-gray-300">Monthly Subscription</p>
-                                <p className="text-sm text-gray-400 mt-2">
+                                <p className="text-sm text-gray-500 mt-2">
                                     Next billing date: {billingInfo?.nextBillingDate ? new Date(billingInfo.nextBillingDate).toLocaleDateString() : 'N/A'}
                                 </p>
                             </>
@@ -127,12 +127,12 @@ export default function BillingClient({  user }: BillingClientProps) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div className="text-center p-4 bg-green-500/20 rounded-xl">
                             <CreditCard className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                            <div className="text-2xl font-bold text-white">{billingInfo?.currency}{billingInfo?.monthlyTotal}</div>
+                            <div className="text-2xl font-bold text-gray-900">{billingInfo?.currency}{billingInfo?.monthlyTotal}</div>
                             <p className="text-green-300 text-sm">Per Store/Month</p>
                         </div>
                         <div className="text-center p-4 bg-purple-500/20 rounded-xl">
                             <Calendar className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                            <div className="text-2xl font-bold text-white">30</div>
+                            <div className="text-2xl font-bold text-gray-900">30</div>
                             <p className="text-purple-300 text-sm">Days in Cycle</p>
                         </div>
                     </div>
@@ -151,7 +151,7 @@ export default function BillingClient({  user }: BillingClientProps) {
                         <Button 
                             onClick={handlePayment}
                             disabled={paymentLoading || billingInfo?.status === 'trial'}
-                            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg disabled:opacity-50"
+                            className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700 px-8 py-3 text-lg disabled:opacity-50"
                         >
                             {paymentLoading ? 'Processing...' : billingInfo?.status === 'trial' ? 'Trial Active' : `Pay ${billingInfo?.currency}${billingInfo?.monthlyTotal}`}
                         </Button>
@@ -160,24 +160,24 @@ export default function BillingClient({  user }: BillingClientProps) {
 
                 {/* Branch Breakdown */}
                 <motion.div 
-                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg mb-8"
+                    className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-lg mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                 >
-                    <h3 className="text-xl font-semibold text-white mb-6">Store Subscription</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-6">Store Subscription</h3>
                     <div className="space-y-4">
-                        <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                             <div className="flex items-center space-x-3">
-                                <Building2 className="w-5 h-5 text-gray-400" />
+                                <Building2 className="w-5 h-5 text-gray-500" />
                                 <div>
                                     <p className="font-medium text-white">Store Subscription</p>
-                                    <p className="text-sm text-gray-400">Monthly billing</p>
+                                    <p className="text-sm text-gray-500">Monthly billing</p>
                                 </div>
                             </div>
                             <div className="text-right">
                                 <p className="font-semibold text-white">{billingInfo?.currency}{billingInfo?.monthlyTotal}</p>
-                                <p className="text-sm text-gray-400">per month</p>
+                                <p className="text-sm text-gray-500">per month</p>
                             </div>
                         </div>
                     </div>
@@ -185,12 +185,12 @@ export default function BillingClient({  user }: BillingClientProps) {
 
                 {/* Payment History */}
                 <motion.div 
-                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg"
+                    className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                 >
-                    <h3 className="text-xl font-semibold text-white mb-6">Payment History</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-6">Payment History</h3>
                     <div className="space-y-4">
                         {billingInfo?.paymentHistory && billingInfo.paymentHistory.length > 0 ? (
                             billingInfo.paymentHistory

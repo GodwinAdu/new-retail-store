@@ -154,6 +154,7 @@ export interface IProduct extends Document {
   name: string;
   description?: string;
   price: number;
+  costPrice: number;
   image?: string;
   isAvailable: boolean;
   sku: string;
@@ -195,7 +196,6 @@ export interface ICustomer extends Document {
   lastVisit?: Date;
   createdAt: Date;
   updatedAt: Date;
-  branchId?: Types.ObjectId;
 }
 
 // Social Media Types
@@ -220,7 +220,6 @@ export interface ISocialPost extends Document {
   errorMessage?: string;
   createdAt: Date;
   updatedAt: Date;
-  branchId?: Types.ObjectId;
 }
 
 // Offline Sale Types
@@ -237,7 +236,6 @@ export interface IOfflineSale extends Document {
   deviceId?: string;
   createdAt: Date;
   updatedAt: Date;
-  branchId?: Types.ObjectId;
 }
 
 // Notification Types
@@ -256,7 +254,6 @@ export interface INotification extends Document {
   errorMessage?: string;
   createdAt: Date;
   updatedAt: Date;
-  branchId?: Types.ObjectId;
 }
 
 // Sale Types
@@ -289,5 +286,4 @@ export interface ISale extends Document {
   cashierId?: Schema.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
-  branchId?: Schema.Types.ObjectId;
 }

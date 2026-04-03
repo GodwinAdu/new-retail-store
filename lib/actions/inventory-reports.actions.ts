@@ -6,6 +6,7 @@ import Sale from "@/lib/models/sale.models";
 import StockMovement from "@/lib/models/stock-movement.models";
 import { withSubscriptionCheckByStoreId } from "@/lib/utils/subscription-wrapper";
 import mongoose from "mongoose";
+import User from "../models/user.models";
 
 export const getStockMovementReport = withSubscriptionCheckByStoreId(async (storeId: string, startDate?: Date, endDate?: Date) => {
   try {
@@ -19,8 +20,7 @@ export const getStockMovementReport = withSubscriptionCheckByStoreId(async (stor
     }
     
     const movements = await StockMovement.find(query)
-      .populate("productId", "name sku")
-      .populate("userId", "fullName")
+      .populate([{path:"productId", model:Product, select:"name sku"},{path:"userId",model:User,select:"fullName"}])
       .sort({ createdAt: -1 })
       .lean();
     
@@ -162,7 +162,7 @@ export const getStockAgingReport = withSubscriptionCheckByStoreId(async (storeId
         productId: product._id,
         productName: product.name,
         sku: product.sku,
-        category: product.categoryId?.name || "Uncategorized",
+        category: (product.categoryId as any)?.name || "Uncategorized",
         stock: product.stock,
         stockValue,
         daysSinceCreated,

@@ -111,7 +111,7 @@ export default function HomePage() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-emerald-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 relative overflow-hidden">
       <ParticleSystem />
       {/* Navigation */}
       <nav className="bg-white/80 backdrop-blur-sm border-b border-white/20 sticky top-0 z-50">
@@ -141,7 +141,7 @@ export default function HomePage() {
                 <Button variant="ghost">Sign In</Button>
               </Link>
               <Link href="/sign-up">
-                <Button className="bg-gradient-to-r from-emerald-600 to-slate-700 hover:from-emerald-700 hover:to-slate-800">
+                <Button className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700">
                   Get Started
                 </Button>
               </Link>
@@ -156,14 +156,14 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                 Complete Retail
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-amber-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400">
                   {" "}
                   Management System
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
                 Streamline your retail operations with our comprehensive POS
                 system. Manage inventory, sales, customers, and analytics all in
                 one platform.
@@ -172,20 +172,20 @@ export default function HomePage() {
                 <Link href="/sign-up">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-emerald-600 to-slate-700 hover:from-emerald-700 hover:to-slate-800 text-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all"
+                    className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700 text-lg px-8 py-3 shadow-lg hover:shadow-xl transition-all"
                   >
                     Start Free Trial
                   </Button>
                 </Link>
-                <Button
+                {/* <Button
                   size="lg"
                   variant="outline"
                   className="text-lg px-8 py-3 hover:bg-emerald-50 transition-all"
                 >
                   Watch Demo
-                </Button>
+                </Button> */}
               </div>
-              <div className="flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-500">
+              <div className="flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-400">
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <span>30-day free trial</span>
@@ -212,7 +212,7 @@ export default function HomePage() {
                 >
                   {/* Main Dashboard Screen */}
                   <div className="relative bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl p-6 shadow-2xl border border-white/10 backdrop-blur-xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-amber-500/10 rounded-3xl" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-3xl" />
                     
                     {/* Screen Header */}
                     <div className="flex items-center justify-between mb-6">
@@ -267,7 +267,7 @@ export default function HomePage() {
                           {[65, 45, 80, 55, 90, 70, 85, 60, 75, 95].map((height, i) => (
                             <motion.div
                               key={i}
-                              className="bg-gradient-to-t from-emerald-500 to-amber-500 rounded-sm flex-1"
+                              className="bg-gradient-to-t from-emerald-500 via-cyan-500 to-blue-500 rounded-sm flex-1"
                               style={{ height: `${height}%` }}
                               initial={{ height: 0 }}
                               animate={{ height: `${height}%` }}
@@ -315,7 +315,7 @@ export default function HomePage() {
                   </motion.div>
                   
                   <motion.div 
-                    className="absolute -bottom-4 -left-4 w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center shadow-2xl"
+                    className="absolute -bottom-4 -left-4 w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-2xl"
                     animate={{ y: [0, -8, 0], rotate: [0, -5, 0] }}
                     transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
                   >
@@ -334,7 +334,7 @@ export default function HomePage() {
               
               {/* Background Effects */}
               <motion.div 
-                className="absolute top-20 right-20 w-40 h-40 bg-gradient-to-br from-emerald-400/20 to-amber-400/20 rounded-full blur-3xl"
+                className="absolute top-20 right-20 w-40 h-40 bg-gradient-to-br from-emerald-400/20 to-cyan-400/20 rounded-full blur-3xl"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
               />
@@ -673,7 +673,7 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-32 px-6 bg-gradient-to-br from-slate-900 via-gray-900 to-emerald-900 relative overflow-hidden">
+      <section className="py-32 px-6 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.1)_0%,transparent_70%)]" />
         <div className="max-w-7xl mx-auto relative">
           <motion.div
@@ -688,7 +688,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500/10 to-amber-500/10 rounded-full border border-emerald-500/20 mb-8"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full border border-emerald-500/20 mb-8"
             >
               <Zap className="w-5 h-5 text-emerald-400 mr-2" />
               <span className="text-emerald-300 font-medium">
@@ -705,7 +705,7 @@ export default function HomePage() {
             >
               Choose Your
               <br />
-              <span className="bg-gradient-to-r from-emerald-400 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Perfect Plan
               </span>
             </motion.h2>
@@ -867,7 +867,7 @@ export default function HomePage() {
                   <div className="text-white font-medium">SSL Security</div>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <Clock className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-white font-medium">99.9% Uptime</div>
@@ -879,7 +879,7 @@ export default function HomePage() {
                   <div className="text-white font-medium">Cloud Backup</div>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-white font-medium">Free Updates</div>
@@ -891,7 +891,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6 bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-700 relative overflow-hidden">
+      <section className="py-32 px-6 bg-gradient-to-br from-emerald-600 via-cyan-600 to-blue-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/40" />
         <motion.div
           className="absolute inset-0"
@@ -928,7 +928,7 @@ export default function HomePage() {
           >
             Ready to
             <br />
-            <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-200 via-cyan-200 to-white bg-clip-text text-transparent">
               Dominate Retail?
             </span>
           </motion.h2>

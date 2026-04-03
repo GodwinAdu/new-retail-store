@@ -8,11 +8,7 @@ const NotificationSchema: Schema<INotification> = new Schema(
             ref: "Store",
             required: true,
         },
-        branchId: {
-            type: Schema.Types.ObjectId,
-            ref: "Branch",
-            required: true,
-        },
+
         type: {
             type: String,
             enum: ['sms', 'email', 'push'],

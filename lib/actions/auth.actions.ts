@@ -148,9 +148,12 @@ export async function signUp(data: SignUpData) {
             redirectUrl: `/dashboard/${savedStore._id.toString()}`
         };
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Sign up error:", error);
-        throw error;
+        return {
+            success: false,
+            error: error.message || "An error occurred during signup",
+        };
     }
 }
 
@@ -220,9 +223,12 @@ export async function signIn(data: SignInData) {
             redirectUrl
         };
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Sign in error:", error);
-        throw error;
+        return {
+            success: false,
+            error: error.message || "An error occurred during login",
+        };
     }
 }
 

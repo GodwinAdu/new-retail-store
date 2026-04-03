@@ -50,11 +50,11 @@ export default function AddProductDialog({ storeId, onProductAdded }: AddProduct
 
   useEffect(() => {
     const loadData = async () => {
-      const [categoriesData, suppliersData] = await Promise.all([
+      const [categoriesResult, suppliersData] = await Promise.all([
         getCategories(storeId),
         getSuppliers(storeId)
       ]);
-      setCategories(categoriesData);
+      setCategories(categoriesResult?.data || categoriesResult || []);
       setSuppliers(suppliersData);
     };
     if (open) {
@@ -122,8 +122,8 @@ export default function AddProductDialog({ storeId, onProductAdded }: AddProduct
   };
 
   const handleCategoryCreated = async () => {
-    const categoriesData = await getCategories(storeId);
-    setCategories(categoriesData);
+    const result = await getCategories(storeId);
+    setCategories(result?.data || result || []);
   };
 
   return (

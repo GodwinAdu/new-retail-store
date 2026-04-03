@@ -23,11 +23,14 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-slate-600 rounded-xl flex items-center justify-center">
-                <ShoppingCart className="w-6 h-6 text-white" />
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/30 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
+                  <Zap className="w-6 h-6 text-white relative z-10" />
+                </div>
               </div>
               <div>
-                <span className="text-xl font-bold text-gray-900">RetailPOS</span>
+                <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">QounterPay</span>
                 <div className="text-xs text-emerald-600">Professional Management</div>
               </div>
             </Link>
@@ -39,7 +42,7 @@ export default function PricingPage() {
                 <Button variant="ghost">Sign In</Button>
               </Link>
               <Link href="/sign-up">
-                <Button className="bg-gradient-to-r from-emerald-600 to-slate-700 hover:from-emerald-700 hover:to-slate-800">
+                <Button className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700">
                   Get Started
                 </Button>
               </Link>
@@ -293,7 +296,7 @@ export default function PricingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-slate-700">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             className="text-4xl md:text-5xl font-bold text-white mb-6"
@@ -309,7 +312,7 @@ export default function PricingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Join thousands of retailers who trust RetailPOS for their business success.
+            Join thousands of retailers who trust QounterPay for their business success.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center"

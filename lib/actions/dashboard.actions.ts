@@ -16,7 +16,7 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
     // Ensure valid Date objects
     let start: Date;
     let end: Date;
-    
+
     if (startDate) {
       start = new Date(startDate);
       if (isNaN(start.getTime())) {
@@ -25,7 +25,7 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
     } else {
       start = new Date(new Date().setHours(0, 0, 0, 0));
     }
-    
+
     if (endDate) {
       end = new Date(endDate);
       if (isNaN(end.getTime())) {
@@ -34,12 +34,12 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
     } else {
       end = new Date(new Date().setHours(23, 59, 59, 999));
     }
-    
+
     const yesterday = new Date(start.getTime() - 24 * 60 * 60 * 1000);
 
     // Today's sales and revenue
     console.log('Dashboard query params:', { storeId, start, end });
-    
+
     // First check if there are ANY sales for this store/branch
     const allSales = await Sale.find({
       storeId: new Types.ObjectId(storeId)
@@ -48,7 +48,7 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
     if (allSales.length > 0) {
       console.log('Sample sale:', JSON.stringify(allSales[0], null, 2));
     }
-    
+
     const todaySales = await Sale.find({
       storeId: new Types.ObjectId(storeId),
       createdAt: { $gte: start, $lte: end }
@@ -58,7 +58,7 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
       storeId: new Types.ObjectId(storeId),
       createdAt: { $gte: yesterday, $lt: start }
     });
-    
+
     console.log('Found sales:', { todayCount: todaySales.length, yesterdayCount: yesterdaySales.length });
 
     const todayRevenue = todaySales.reduce((sum, sale) => sum + sale.total, 0);
@@ -68,7 +68,7 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
     // Products and stock
     const products = await Product.find({
       storeId: new Types.ObjectId(storeId)
-    }).populate({path:'categoryId',model:Category});
+    }).populate({ path: 'categoryId', model: Category });
 
     const lowStockProducts = products.filter(p => p.stock <= (p.minStock || 5) && p.stock > 0);
     const outOfStockProducts = products.filter(p => p.stock === 0);
@@ -91,7 +91,7 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
       dayStart.setHours(0, 0, 0, 0);
       const dayEnd = new Date(dayStart);
       dayEnd.setHours(23, 59, 59, 999);
-      
+
       const daySales = await Sale.find({
         storeId: new Types.ObjectId(storeId),
         createdAt: { $gte: dayStart, $lte: dayEnd }
@@ -138,9 +138,9 @@ export const getDashboardData = withSubscriptionCheckByStoreId(async (storeId: s
     const recentSales = await Sale.find({
       storeId: new Types.ObjectId(storeId)
     })
-    .sort({ createdAt: -1 })
-    .limit(5)
-    .select('saleNumber total status createdAt');
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .select('saleNumber total status createdAt');
 
     // Active staff
     const activeStaff = await User.countDocuments({

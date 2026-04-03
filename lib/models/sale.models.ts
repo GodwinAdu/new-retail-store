@@ -8,11 +8,7 @@ const SaleSchema: Schema<ISale> = new Schema(
             ref: "Store",
             required: true,
         },
-        branchId: {
-            type: Schema.Types.ObjectId,
-            ref: "Branch",
-            required: true,
-        },
+
         saleNumber: {
             type: String,
             required: true,

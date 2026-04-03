@@ -22,10 +22,10 @@ export default function StoreRedirect({ storeId, branches }: StoreRedirectProps)
   }, [storeId, branches, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20 flex items-center justify-center">
       <div className="text-center">
-        <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-gray-300">Redirecting...</p>
+        <div className="w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-500">Redirecting...</p>
       </div>
     </div>
   );

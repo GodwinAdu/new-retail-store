@@ -20,7 +20,7 @@ export default async function InventoryPage({ params }: InventoryPageProps) {
 
     return (
         <ProtectedRoute user={user} requiredPermissions={[PERMISSIONS.VIEW_INVENTORY]}>
-            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex">
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
                 <div className="flex-1 p-6 overflow-auto">
                     <div className="max-w-7xl mx-auto">
                         <InventoryClient storeId={storeId}  user={user} />

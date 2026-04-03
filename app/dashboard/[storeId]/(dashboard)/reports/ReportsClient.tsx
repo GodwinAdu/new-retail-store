@@ -85,29 +85,29 @@ export default function ReportsClient({ storeId, initialStats, initialSalesChart
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex">
-      <div className="flex-1 p-6 overflow-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
+      <div className="p-6 overflow-auto">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center space-x-4 mb-2">
                 <Link href={`/dashboard/${storeId}`}>
-                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                  <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Dashboard
                   </Button>
                 </Link>
               </div>
-              <h1 className="text-3xl font-bold text-white">Reports & Analytics</h1>
-              <p className="text-gray-300 mt-1">Comprehensive business insights and performance metrics</p>
+              <h1 className="text-3xl font-bold text-gray-900">Reports & Analytics</h1>
+              <p className="text-gray-500 mt-1">Comprehensive business insights and performance metrics</p>
             </div>
             <div className="flex space-x-3">
               <Select value={dateRange} onValueChange={handleDateRangeChange}>
-                <SelectTrigger className="w-40 bg-slate-800 border-slate-600 text-white">
+                <SelectTrigger className="w-40">
                   <Calendar className="w-4 h-4 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-600">
+                <SelectContent className="">
                   <SelectItem value="today">Today</SelectItem>
                   <SelectItem value="yesterday">Yesterday</SelectItem>
                   <SelectItem value="this_week">This Week</SelectItem>
@@ -121,7 +121,7 @@ export default function ReportsClient({ storeId, initialStats, initialSalesChart
                 </SelectContent>
               </Select>
               <Button 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700"
                 onClick={exportReport}
               >
                 <Download className="w-4 h-4 mr-2" />
@@ -131,71 +131,71 @@ export default function ReportsClient({ storeId, initialStats, initialSalesChart
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">Total Revenue</p>
-                    <p className="text-2xl font-bold text-white">GH₵{stats.totalRevenue.toFixed(0)}</p>
+                    <p className="text-gray-500 text-sm">Total Revenue</p>
+                    <p className="text-2xl font-bold text-gray-900">GH₵{stats.totalRevenue.toFixed(0)}</p>
                     <p className={`text-sm ${getGrowthColor(stats.revenueGrowth)}`}>
                       {formatGrowth(stats.revenueGrowth)} vs last month
                     </p>
                   </div>
-                  <DollarSign className="w-8 h-8 text-green-400" />
+                  <DollarSign className="w-8 h-8 text-emerald-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">Total Orders</p>
-                    <p className="text-2xl font-bold text-white">{stats.totalOrders}</p>
+                    <p className="text-gray-500 text-sm">Total Orders</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalOrders}</p>
                     <p className={`text-sm ${getGrowthColor(stats.ordersGrowth)}`}>
                       {formatGrowth(stats.ordersGrowth)} vs last month
                     </p>
                   </div>
-                  <ShoppingCart className="w-8 h-8 text-blue-400" />
+                  <ShoppingCart className="w-8 h-8 text-cyan-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">New Customers</p>
-                    <p className="text-2xl font-bold text-white">{stats.newCustomers}</p>
+                    <p className="text-gray-500 text-sm">New Customers</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.newCustomers}</p>
                     <p className={`text-sm ${getGrowthColor(stats.customersGrowth)}`}>
                       {formatGrowth(stats.customersGrowth)} vs last month
                     </p>
                   </div>
-                  <Users className="w-8 h-8 text-purple-400" />
+                  <Users className="w-8 h-8 text-blue-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">Products Sold</p>
-                    <p className="text-2xl font-bold text-white">{stats.totalProducts}</p>
+                    <p className="text-gray-500 text-sm">Products Sold</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalProducts}</p>
                     <p className={`text-sm ${getGrowthColor(stats.productsGrowth)}`}>
                       {formatGrowth(stats.productsGrowth)} vs last month
                     </p>
                   </div>
-                  <Package className="w-8 h-8 text-orange-400" />
+                  <Package className="w-8 h-8 text-amber-500" />
                 </div>
               </CardContent>
             </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-white flex items-center">
+                <CardTitle className="text-gray-900 flex items-center">
                   <BarChart3 className="w-5 h-5 mr-2" />
                   Sales & Profit Trends
                 </CardTitle>
@@ -248,9 +248,9 @@ export default function ReportsClient({ storeId, initialStats, initialSalesChart
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-white flex items-center">
+                <CardTitle className="text-gray-900 flex items-center">
                   <TrendingUp className="w-5 h-5 mr-2" />
                   Sales by Category
                 </CardTitle>
@@ -263,16 +263,16 @@ export default function ReportsClient({ storeId, initialStats, initialSalesChart
                         <div key={index} className="flex items-center justify-between">
                           <div className="flex items-center space-x-3">
                             <div className="w-4 h-4 rounded" style={{backgroundColor: category.color}}></div>
-                            <span className="text-white">{category.name}</span>
+                            <span className="text-gray-900">{category.name}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <div className="w-32 bg-gray-700 rounded-full h-2">
+                            <div className="w-32 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="h-2 rounded-full transition-all" 
                                 style={{backgroundColor: category.color, width: `${category.value}%`}}
                               ></div>
                             </div>
-                            <span className="text-gray-300 text-sm">{category.value}%</span>
+                            <span className="text-gray-500 text-sm">{category.value}%</span>
                           </div>
                         </div>
                       ))}
@@ -288,29 +288,29 @@ export default function ReportsClient({ storeId, initialStats, initialSalesChart
             </Card>
           </div>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+          <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-white">Performance Summary</CardTitle>
+              <CardTitle className="text-gray-900">Performance Summary</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-xl">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
+                <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl">
+                  <div className="text-3xl font-bold text-emerald-600 mb-2">
                     {stats.totalOrders > 0 ? '94.2%' : '0%'}
                   </div>
-                  <p className="text-blue-300 text-sm">Customer Satisfaction</p>
-                  <p className="text-gray-400 text-xs mt-1">Based on completed orders</p>
+                  <p className="text-emerald-700 text-sm">Customer Satisfaction</p>
+                  <p className="text-gray-500 text-xs mt-1">Based on completed orders</p>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-green-500/20 to-green-600/20 rounded-xl">
-                  <div className="text-3xl font-bold text-green-400 mb-2">3.2min</div>
-                  <p className="text-green-300 text-sm">Avg. Transaction Time</p>
-                  <p className="text-gray-400 text-xs mt-1">Estimated processing time</p>
+                <div className="text-center p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl">
+                  <div className="text-3xl font-bold text-cyan-600 mb-2">3.2min</div>
+                  <p className="text-cyan-700 text-sm">Avg. Transaction Time</p>
+                  <p className="text-gray-500 text-xs mt-1">Estimated processing time</p>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-purple-500/20 to-purple-600/20 rounded-xl">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
+                <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">
                     GH₵{stats.avgOrderValue.toFixed(0)}
                   </div>
-                  <p className="text-purple-300 text-sm">Avg. Order Value</p>
+                  <p className="text-blue-700 text-sm">Avg. Order Value</p>
                   <p className={`text-xs mt-1 ${getGrowthColor(stats.avgOrderValueGrowth)}`}>
                     {formatGrowth(stats.avgOrderValueGrowth)} vs last month
                   </p>

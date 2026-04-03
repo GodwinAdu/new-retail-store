@@ -8,10 +8,10 @@ export const getCategories = withSubscriptionCheckByStoreId(async (storeId: stri
   try {
     await connectToDB();
     const categories = await Category.find({ store: storeId }).lean();
-    return JSON.parse(JSON.stringify(categories));
+    return { success: true, data: JSON.parse(JSON.stringify(categories)) };
   } catch (error) {
     console.error("Error fetching categories:", error);
-    return [];
+    return { success: true, data: [] };
   }
 });
 

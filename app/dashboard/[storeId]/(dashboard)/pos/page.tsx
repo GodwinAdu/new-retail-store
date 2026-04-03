@@ -414,12 +414,12 @@ export default function POSPage() {
     );
 
     return (
-        <div className={`w-full h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950 text-white overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
+        <div className={`w-full h-screen bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 text-white overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-                <div className="absolute top-3/4 left-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute top-3/4 left-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
             </div>
             {/* Modern Header */}
             <motion.div
@@ -488,9 +488,9 @@ export default function POSPage() {
 
 
                         <div className="flex items-center space-x-2 text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-xl">
-                            <User className="w-4 h-4 text-purple-400" />
+                            <User className="w-4 h-4 text-emerald-400" />
                             <span className="text-sm font-medium">{currentUser?.fullName || "Loading..."}</span>
-                            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-xs">
                                 {currentUser?.role || "User"}
                             </Badge>
                         </div>
@@ -612,7 +612,7 @@ export default function POSPage() {
                                                     toast.error("Failed to save settings");
                                                 }
                                             }}
-                                            className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500"
+                                            className="flex-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500"
                                         >
                                             Save
                                         </Button>
@@ -633,11 +633,11 @@ export default function POSPage() {
                             <div className="flex items-center space-x-6">
                                 <Tabs value={activeTab} onValueChange={setActiveTab}>
                                     <TabsList className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-1 shadow-lg">
-                                        <TabsTrigger value="products" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/25 data-[state=active]:!text-white text-gray-300 hover:!text-white rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10">
+                                        <TabsTrigger value="products" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 data-[state=active]:!text-white text-gray-300 hover:!text-white rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10">
                                             <Package className="w-4 h-4 mr-2" />
                                             Products
                                         </TabsTrigger>
-                                        <TabsTrigger value="services" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:shadow-lg data-[state=active]:shadow-purple-500/25 data-[state=active]:!text-white text-gray-300 hover:!text-white rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10">
+                                        <TabsTrigger value="services" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 data-[state=active]:!text-white text-gray-300 hover:!text-white rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10">
                                             <Star className="w-4 h-4 mr-2" />
                                             Services
                                         </TabsTrigger>
@@ -649,7 +649,7 @@ export default function POSPage() {
                                         variant={viewMode === 'grid' ? 'default' : 'ghost'}
                                         size="sm"
                                         onClick={() => setViewMode('grid')}
-                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'grid' ? 'bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg shadow-blue-500/25 !text-white' : 'hover:bg-white/10 text-gray-300 hover:!text-white'}`}
+                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'grid' ? 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 shadow-lg shadow-emerald-500/25 !text-white' : 'hover:bg-white/10 text-gray-300 hover:!text-white'}`}
                                     >
                                         <Grid className="w-4 h-4" />
                                     </Button>
@@ -657,7 +657,7 @@ export default function POSPage() {
                                         variant={viewMode === 'list' ? 'default' : 'ghost'}
                                         size="sm"
                                         onClick={() => setViewMode('list')}
-                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'list' ? 'bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg shadow-blue-500/25 !text-white' : 'hover:bg-white/10 text-gray-300 hover:!text-white'}`}
+                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'list' ? 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 shadow-lg shadow-emerald-500/25 !text-white' : 'hover:bg-white/10 text-gray-300 hover:!text-white'}`}
                                     >
                                         <List className="w-4 h-4" />
                                     </Button>
@@ -667,7 +667,7 @@ export default function POSPage() {
                             <div className="flex items-center space-x-3">
                                 <Dialog open={showCustomer} onOpenChange={setShowCustomer}>
                                     <DialogTrigger asChild>
-                                        <Button variant="outline" size="sm" className="border-white/20 text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-400/40 rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-500/25">
+                                        <Button variant="outline" size="sm" className="border-white/20 text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-emerald-500/20 hover:to-cyan-500/20 hover:border-emerald-400/40 rounded-xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/25">
                                             <Users className="w-4 h-4 mr-2" />
                                             {selectedCustomer ? selectedCustomer.name : "Customer"}
                                         </Button>
@@ -801,7 +801,7 @@ export default function POSPage() {
                                     variant={selectedCategory === category ? "default" : "outline"}
                                     onClick={() => setSelectedCategory(category)}
                                     className={`rounded-xl transition-all duration-300 ${selectedCategory === category
-                                        ? "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg shadow-blue-500/25 !text-white"
+                                        ? "bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700 shadow-lg shadow-emerald-500/25 !text-white"
                                         : "border-white/20 !text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 hover:border-white/30"
                                         }`}
                                 >
@@ -822,7 +822,7 @@ export default function POSPage() {
                                 <p className="text-gray-400 mb-4">There are no products available in this category.</p>
                                 <Button
                                     onClick={() => setSelectedCategory("All")}
-                                    className="bg-gradient-to-r from-blue-500 to-purple-500"
+                                    className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500"
                                 >
                                     View All Products
                                 </Button>
@@ -885,7 +885,7 @@ export default function POSPage() {
                                                     </div>
                                                     <Button
                                                         size="sm"
-                                                        className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+                                                        className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             addToCart(product);
@@ -957,7 +957,24 @@ export default function POSPage() {
                                             >
                                                 <Minus className="w-3 h-3" />
                                             </Button>
-                                            <span className="text-white font-medium w-8 text-center bg-white/5 rounded-lg py-1">{item.quantity}</span>
+                                            <span className="text-white font-medium w-8 text-center bg-white/5 rounded-lg py-1">
+                                                <input
+                                                    type="number"
+                                                    min="1"
+                                                    value={item.quantity}
+                                                    onChange={(e) => {
+                                                        const val = parseInt(e.target.value);
+                                                        if (!val || val < 1) return;
+                                                        const product = products.find(p => p._id === (item.originalProductId || item._id.split('_')[0]));
+                                                        if (product && val > product.stock) {
+                                                            toast.error("Not enough stock available");
+                                                            return;
+                                                        }
+                                                        updateQuantity(item._id, val);
+                                                    }}
+                                                    className="w-10 text-center bg-transparent text-white font-medium outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                />
+                                            </span>
                                             <Button
                                                 size="sm"
                                                 variant="outline"
@@ -1061,7 +1078,7 @@ export default function POSPage() {
                             {!showPayment ? (
                                 <div className="space-y-2">
                                     <Button
-                                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 py-3 rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-[1.02]"
+                                        className="w-full bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700 py-3 rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 transform hover:scale-[1.02]"
                                         onClick={() => { setShowPayment(true); setPaymentMethod("card"); }}
                                     >
                                         <CreditCard className="w-5 h-5 mr-2" />
@@ -1251,7 +1268,7 @@ export default function POSPage() {
                             <div className="flex space-x-2">
                                 <Button
                                     onClick={printReceipt}
-                                    className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500"
+                                    className="flex-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500"
                                 >
                                     <Printer className="w-4 h-4 mr-2" />
                                     Print

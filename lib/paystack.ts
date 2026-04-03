@@ -41,7 +41,9 @@ export class PaystackService {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to initialize payment');
+            const errorBody = await response.text();
+            console.error('Paystack init error:', response.status, errorBody);
+            throw new Error(`Paystack error (${response.status}): ${errorBody}`);
         }
 
         return response.json();
@@ -56,7 +58,9 @@ export class PaystackService {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to verify payment');
+            const errorBody = await response.text();
+            console.error('Paystack verify error:', response.status, errorBody);
+            throw new Error(`Paystack verify error (${response.status}): ${errorBody}`);
         }
 
         return response.json();

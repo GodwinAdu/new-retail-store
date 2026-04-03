@@ -52,12 +52,12 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
   const loadData = async () => {
     setLoading(true);
     try {
-      const [productsData, categoriesData] = await Promise.all([
+      const [productsData, categoriesResult] = await Promise.all([
         getProducts(storeId),
         getCategories(storeId)
       ]);
       setProducts(productsData);
-      setCategories(categoriesData);
+      setCategories(categoriesResult?.data || categoriesResult || []);
       
       // Process inventory alerts
       const alerts = InventoryAlertManager.processInventoryAlerts(productsData, inventorySettings);
@@ -203,50 +203,50 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm">Total Products</p>
-                <p className="text-2xl font-bold text-white">{stats.totalProducts}</p>
+                <p className="text-gray-500 text-sm">Total Products</p>
+                <p className="text-2xl font-bold text-gray-900">{stats.totalProducts}</p>
               </div>
-              <Package className="w-8 h-8 text-blue-400" />
+              <Package className="w-8 h-8 text-emerald-500" />
             </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm">Low Stock</p>
+                <p className="text-gray-500 text-sm">Low Stock</p>
                 <p className="text-2xl font-bold text-orange-400">{stats.lowStock}</p>
               </div>
-              <TrendingDown className="w-8 h-8 text-orange-400" />
+              <TrendingDown className="w-8 h-8 text-amber-500" />
             </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm">Out of Stock</p>
+                <p className="text-gray-500 text-sm">Out of Stock</p>
                 <p className="text-2xl font-bold text-red-400">{stats.outOfStock}</p>
               </div>
-              <AlertTriangle className="w-8 h-8 text-red-400" />
+              <AlertTriangle className="w-8 h-8 text-red-500" />
             </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-300 text-sm">Total Value</p>
+                <p className="text-gray-500 text-sm">Total Value</p>
                 <p className="text-2xl font-bold text-green-400">${stats.totalValue.toLocaleString()}</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-green-400" />
+              <TrendingUp className="w-8 h-8 text-cyan-500" />
             </div>
           </CardContent>
         </Card>
@@ -257,13 +257,13 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
         <div>
           <div className="flex items-center space-x-4 mb-2">
             <Link href={`/dashboard/${storeId}`}>
-              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+              <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Dashboard
               </Button>
             </Link>
           </div>
-          <h1 className="text-3xl font-bold text-white">Inventory Management</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Inventory Management</h1>
           <p className="text-gray-300 mt-1">Manage your products and stock levels</p>
         </div>
         <div className="flex space-x-2">
@@ -316,7 +316,7 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
       </div>
 
       {/* Filters */}
-      <Card className="bg-white/10 backdrop-blur-md border-white/20">
+      <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -326,13 +326,13 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
                   placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 pl-10"
+                  className="border-gray-200 placeholder:text-gray-400 pl-10"
                 />
               </div>
             </div>
             
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-48 bg-white/10 border-white/20 text-white">
+              <SelectTrigger className="w-48">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-white/20">
@@ -349,7 +349,7 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
             </Select>
             
             <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-32 bg-white/10 border-white/20 text-white">
+              <SelectTrigger className="w-32">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-white/20">
@@ -363,7 +363,7 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
             <Button
               variant="outline"
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-              // className="border-white/20 text-white hover:bg-white/10"
+              // className="border-gray-200 hover:bg-gray-50"
             >
               {sortOrder === "asc" ? "↑" : "↓"}
             </Button>
@@ -372,9 +372,9 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
       </Card>
 
       {/* Products Table */}
-      <Card className="bg-white/10 backdrop-blur-md border-white/20">
+      <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
         <CardHeader>
-          <CardTitle className="text-white flex items-center">
+          <CardTitle className="text-gray-900 flex items-center">
             <Package className="w-5 h-5 mr-2" />
             Products ({filteredProducts.length})
           </CardTitle>
@@ -383,16 +383,16 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left text-gray-300 font-medium py-3">Product</th>
-                  <th className="text-left text-gray-300 font-medium py-3">SKU</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Category</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Stock</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Cost</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Price</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Profit</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Status</th>
-                  <th className="text-left text-gray-300 font-medium py-3">Actions</th>
+                <tr className="border-b border-gray-100">
+                  <th className="text-left text-gray-500 font-medium py-3">Product</th>
+                  <th className="text-left text-gray-500 font-medium py-3">SKU</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Category</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Stock</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Cost</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Price</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Profit</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Status</th>
+                  <th className="text-left text-gray-500 font-medium py-3">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -402,10 +402,10 @@ export default function InventoryClient({ storeId, user }: InventoryClientProps)
                   const profitMargin = product.costPrice ? ((profit / product.price) * 100).toFixed(1) : 0;
                   
                   return (
-                    <tr key={product._id} className="border-b border-white/5 hover:bg-white/5">
+                    <tr key={product._id} className="border-b border-gray-50 hover:bg-white/5">
                       <td className="py-4">
                         <div>
-                          <div className="text-white font-medium">{product.name}</div>
+                          <div className="text-gray-900 font-medium">{product.name}</div>
                           {product.barcode && (
                             <div className="text-xs text-gray-400">{product.barcode}</div>
                           )}

@@ -205,15 +205,15 @@ export default function SMSMarketingClient({ storeId, userId }: SMSMarketingClie
     <div className="space-y-6">
       <div>
         <Link href={`/dashboard/${storeId}`}>
-          <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white mb-4">
+          <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900 mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Dashboard
           </Button>
         </Link>
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-white">SMS Marketing</h1>
-            <p className="text-gray-300 mt-1">Send targeted SMS campaigns to your customers</p>
+            <h1 className="text-3xl font-bold text-gray-900">SMS Marketing</h1>
+            <p className="text-gray-500 mt-1">Send targeted SMS campaigns to your customers</p>
           </div>
           <Button onClick={() => setShowCampaignDialog(true)}>
             <Plus className="mr-2 h-4 w-4" />
@@ -223,33 +223,33 @@ export default function SMSMarketingClient({ storeId, userId }: SMSMarketingClie
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-300">Total Campaigns</CardTitle>
             <MessageSquare className="h-4 w-4 text-blue-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">{stats.totalCampaigns}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.totalCampaigns}</div>
           </CardContent>
         </Card>
 
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-300">Messages Sent</CardTitle>
             <Send className="h-4 w-4 text-green-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">{stats.totalSent}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.totalSent}</div>
           </CardContent>
         </Card>
 
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-300">Total Cost</CardTitle>
             <DollarSign className="h-4 w-4 text-orange-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">${stats.totalCost.toFixed(2)}</div>
+            <div className="text-2xl font-bold text-gray-900">${stats.totalCost.toFixed(2)}</div>
           </CardContent>
         </Card>
       </div>

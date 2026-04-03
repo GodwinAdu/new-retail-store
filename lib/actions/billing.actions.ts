@@ -80,21 +80,22 @@ export async function initializePayment(storeId: string, userEmail: string) {
         const reference = PaystackService.generateReference(storeId);
         const paymentData = {
             email: userEmail,
-            amount: billingInfo.monthlyPrice,
+            amount: billingInfo.monthlyTotal,
             reference,
             callback_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/${storeId}/billing/verify?reference=${reference}`,
             metadata: {
                 storeId,
                 userId: userEmail,
-                plan: 'retail_monthly'
+                plan: 'retail_monthly',
+                branches: billingInfo.branchCount,
             }
         };
 
         const response = await PaystackService.initializePayment(paymentData);
         return response;
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error initializing payment:", error);
-        throw new Error("Failed to initialize payment");
+        throw new Error(error.message || "Failed to initialize payment");
     }
 }
 

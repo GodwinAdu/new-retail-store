@@ -75,21 +75,21 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex">
-      <div className="flex-1 p-6 overflow-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
+      <div className="p-6 overflow-auto">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center space-x-4 mb-2">
                 <Link href={`/dashboard/${storeId}`}>
-                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                  <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Dashboard
                   </Button>
                 </Link>
               </div>
-              <h1 className="text-3xl font-bold text-white">Customer Management</h1>
-              <p className="text-gray-300 mt-1">Manage your customer database and loyalty program</p>
+              <h1 className="text-3xl font-bold text-gray-900">Customer Management</h1>
+              <p className="text-gray-500 mt-1">Manage your customer database and loyalty program</p>
             </div>
             <AddCustomerDialog 
               storeId={storeId} 
@@ -98,59 +98,59 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">Total Customers</p>
-                    <p className="text-2xl font-bold text-white">{stats.totalCustomers}</p>
+                    <p className="text-gray-500 text-sm">Total Customers</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalCustomers}</p>
                   </div>
-                  <Users className="w-8 h-8 text-blue-400" />
+                  <Users className="w-8 h-8 text-emerald-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">New This Month</p>
-                    <p className="text-2xl font-bold text-white">{stats.newThisMonth}</p>
+                    <p className="text-gray-500 text-sm">New This Month</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.newThisMonth}</p>
                   </div>
-                  <Plus className="w-8 h-8 text-green-400" />
+                  <Plus className="w-8 h-8 text-cyan-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">VIP Customers</p>
-                    <p className="text-2xl font-bold text-white">{stats.vipCustomers}</p>
+                    <p className="text-gray-500 text-sm">VIP Customers</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.vipCustomers}</p>
                   </div>
-                  <Badge className="bg-yellow-500/20 text-yellow-400 border-0">VIP</Badge>
+                  <Badge className="bg-yellow-100 text-yellow-700 border-0">VIP</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-gray-300 text-sm">Avg. Spend</p>
-                    <p className="text-2xl font-bold text-white">GH₵{stats.avgSpend.toFixed(0)}</p>
+                    <p className="text-gray-500 text-sm">Avg. Spend</p>
+                    <p className="text-2xl font-bold text-gray-900">GH₵{stats.avgSpend.toFixed(0)}</p>
                   </div>
-                  <div className="text-green-400">+12%</div>
+                  <div className="text-emerald-600 font-medium">+12%</div>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+          <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-white">Customer List</CardTitle>
+                <CardTitle className="text-gray-900">Customer List</CardTitle>
                 <div className="flex space-x-2">
                   <div className="relative">
                     <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -158,10 +158,10 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
                       placeholder="Search customers..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-slate-800 border-slate-600 text-white"
+                      className="pl-10"
                     />
                   </div>
-                  <Button variant="outline" size="sm" >
+                  <Button variant="outline" size="sm">
                     <Filter className="w-4 h-4 mr-2" />
                     Filter
                   </Button>
@@ -172,23 +172,23 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="text-left text-gray-300 font-medium py-3">Customer</th>
-                      <th className="text-left text-gray-300 font-medium py-3">Contact</th>
-                      <th className="text-left text-gray-300 font-medium py-3">Total Spent</th>
-                      <th className="text-left text-gray-300 font-medium py-3">Points</th>
-                      <th className="text-left text-gray-300 font-medium py-3">Status</th>
-                      <th className="text-left text-gray-300 font-medium py-3">Actions</th>
+                    <tr className="border-b border-gray-100">
+                      <th className="text-left text-gray-500 font-medium py-3">Customer</th>
+                      <th className="text-left text-gray-500 font-medium py-3">Contact</th>
+                      <th className="text-left text-gray-500 font-medium py-3">Total Spent</th>
+                      <th className="text-left text-gray-500 font-medium py-3">Points</th>
+                      <th className="text-left text-gray-500 font-medium py-3">Status</th>
+                      <th className="text-left text-gray-500 font-medium py-3">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredCustomers.map((customer) => {
                       const status = getCustomerStatus(customer.totalPurchases);
                       return (
-                        <tr key={customer._id} className="border-b border-white/5">
+                        <tr key={customer._id} className="border-b border-gray-50 hover:bg-gray-50/50">
                           <td className="py-4">
                             <div>
-                              <p className="text-white font-medium">{customer.name}</p>
+                              <p className="text-gray-900 font-medium">{customer.name}</p>
                               <p className="text-gray-400 text-sm">
                                 Joined {new Date(customer.createdAt).toLocaleDateString()}
                               </p>
@@ -196,12 +196,12 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
                           </td>
                           <td className="py-4">
                             <div>
-                              <p className="text-gray-300">{customer.email || "No email"}</p>
+                              <p className="text-gray-600">{customer.email || "No email"}</p>
                               <p className="text-gray-400 text-sm">{customer.phone || "No phone"}</p>
                             </div>
                           </td>
-                          <td className="py-4 text-white font-medium">GH₵{customer.totalPurchases.toFixed(2)}</td>
-                          <td className="py-4 text-yellow-400 font-medium">{customer.loyaltyPoints}</td>
+                          <td className="py-4 text-gray-900 font-medium">GH₵{customer.totalPurchases.toFixed(2)}</td>
+                          <td className="py-4 text-amber-600 font-medium">{customer.loyaltyPoints}</td>
                           <td className="py-4">
                             <Badge className={`${status.color} border-0`}>
                               {status.label}
@@ -212,7 +212,7 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
                               <Button 
                                 size="sm" 
                                 variant="ghost" 
-                                className="text-blue-400 hover:text-blue-300"
+                                className="text-emerald-600 hover:text-emerald-700"
                                 onClick={() => handleViewDetails(customer)}
                               >
                                 <Eye className="w-4 h-4" />
@@ -220,7 +220,7 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
                               <Button 
                                 size="sm" 
                                 variant="ghost" 
-                                className="text-green-400 hover:text-green-300"
+                                className="text-cyan-600 hover:text-cyan-700"
                                 onClick={() => handleEdit(customer)}
                               >
                                 <Edit className="w-4 h-4" />
@@ -228,7 +228,7 @@ export default function CustomersClient({ storeId,initialCustomers, initialStats
                               <Button 
                                 size="sm" 
                                 variant="ghost" 
-                                className="text-red-400 hover:text-red-300"
+                                className="text-red-500 hover:text-red-600"
                                 onClick={() => handleDelete(customer)}
                               >
                                 <Trash2 className="w-4 h-4" />

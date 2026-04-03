@@ -8,11 +8,7 @@ const SocialPostSchema: Schema<ISocialPost> = new Schema(
             ref: "Store",
             required: true,
         },
-        branchId: {
-            type: Schema.Types.ObjectId,
-            ref: "Branch",
-            required: true,
-        },
+
         platform: {
             type: String,
             enum: ['facebook', 'instagram', 'twitter', 'whatsapp'],

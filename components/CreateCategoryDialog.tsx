@@ -59,16 +59,16 @@ export default function CreateCategoryDialog({ storeId, onCategoryCreated }: Cre
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button type="button" variant="outline" size="sm" onClick={(e) => e.stopPropagation()}>
           <Plus className="w-3 h-3 mr-1" />
           New
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle>Create Category</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={(e) => { e.stopPropagation(); handleSubmit(e); }} className="space-y-4">
           <div>
             <Label htmlFor="name">Category Name *</Label>
             <Input

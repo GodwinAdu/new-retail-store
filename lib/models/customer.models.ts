@@ -8,12 +8,7 @@ const CustomerSchema: Schema<ICustomer> = new Schema(
             ref: "Store",
             required: true,
         },
-        branchId: {
-            type: Schema.Types.ObjectId,
-            ref: "Branch",
-            required: false,
-            default: null,
-        },
+
         name: {
             type: String,
             required: true,
