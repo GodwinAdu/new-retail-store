@@ -414,16 +414,16 @@ export default function POSPage() {
     );
 
     return (
-        <div className={`w-full h-screen bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 text-white overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
+        <div className={`w-full h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20 text-gray-900 overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-                <div className="absolute top-3/4 left-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-200/30 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute top-3/4 left-1/2 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
             </div>
             {/* Modern Header */}
             <motion.div
-                className="relative bg-black/30 backdrop-blur-xl border-b border-white/10 p-4 z-10"
+                className="relative bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm p-4 z-10"
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
             >
@@ -431,7 +431,7 @@ export default function POSPage() {
                     <div className="flex items-center space-x-8">
                         <div className="flex items-center space-x-4">
                             <div className="relative">
-                                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/50 relative overflow-hidden">
+                                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/30 relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
                                     <Zap className="w-7 h-7 text-white relative z-10 drop-shadow-lg" />
                                 </div>
@@ -441,7 +441,7 @@ export default function POSPage() {
                                 <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow-lg">QounterPay</h1>
                                 <div className="flex items-center space-x-2">
                                     <p className="text-xs text-gray-400">Terminal #001</p>
-                                    <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs px-2 py-0">
+                                    <Badge className="bg-emerald-100 text-emerald-700 border-green-500/30 text-xs px-2 py-0">
                                         <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1 animate-pulse"></div>
                                         Live
                                     </Badge>
@@ -450,22 +450,22 @@ export default function POSPage() {
                         </div>
 
                         <div className="flex items-center space-x-4">
-                            <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl px-4 py-2">
+                            <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2">
                                 <div className="flex items-center space-x-2">
                                     <TrendingUp className="w-4 h-4 text-green-400" />
                                     <div>
-                                        <p className="text-xs text-green-400">Today's Sales</p>
-                                        <p className="text-sm font-bold text-white">{salesStats.todaySales}</p>
+                                        <p className="text-xs text-emerald-600">Today's Sales</p>
+                                        <p className="text-sm font-bold text-gray-900">{salesStats.todaySales}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-xl px-4 py-2">
+                            <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-2">
                                 <div className="flex items-center space-x-2">
                                     <DollarSign className="w-4 h-4 text-blue-400" />
                                     <div>
-                                        <p className="text-xs text-blue-400">Revenue</p>
-                                        <p className="text-sm font-bold text-white">₵{salesStats.todayRevenue.toLocaleString()}</p>
+                                        <p className="text-xs text-blue-600">Revenue</p>
+                                        <p className="text-sm font-bold text-gray-900">₵{salesStats.todayRevenue.toLocaleString()}</p>
                                     </div>
                                 </div>
                             </div>
@@ -474,23 +474,23 @@ export default function POSPage() {
 
                     <div className="flex items-center space-x-3">
                         <Link href={`/dashboard/${storeId}/}`}>
-                            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 rounded-xl">
+                            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 border border-gray-200 rounded-xl">
                                 <ArrowLeft className="w-4 h-4 mr-2" />
                                 Dashboard
                             </Button>
                         </Link>
 
-                        <div className="flex items-center space-x-2 text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-xl">
+                        <div className="flex items-center space-x-2 text-gray-300 bg-gray-50 backdrop-blur-sm border border-gray-200 px-4 py-2 rounded-xl">
                             <Clock className="w-4 h-4 text-blue-400" />
                             <span className="font-mono text-sm font-medium">{currentTime.toLocaleTimeString()}</span>
                         </div>
 
 
 
-                        <div className="flex items-center space-x-2 text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-xl">
+                        <div className="flex items-center space-x-2 text-gray-300 bg-gray-50 backdrop-blur-sm border border-gray-200 px-4 py-2 rounded-xl">
                             <User className="w-4 h-4 text-emerald-400" />
                             <span className="text-sm font-medium">{currentUser?.fullName || "Loading..."}</span>
-                            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-xs">
+                            <Badge className="bg-emerald-100 text-emerald-700 border-emerald-500/30 text-xs">
                                 {currentUser?.role || "User"}
                             </Badge>
                         </div>
@@ -499,7 +499,7 @@ export default function POSPage() {
                             variant="ghost"
                             size="sm"
                             onClick={toggleFullscreen}
-                            className="text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 rounded-xl"
+                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 border border-gray-200 rounded-xl"
                         >
                             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
                         </Button>
@@ -509,19 +509,19 @@ export default function POSPage() {
                                 <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 rounded-xl"
+                                    className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 border border-gray-200 rounded-xl"
                                 >
                                     <Settings className="w-4 h-4" />
                                 </Button>
                             </DialogTrigger>
-                            <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/20 max-w-md">
+                            <DialogContent className="bg-white backdrop-blur-xl border-gray-200 shadow-xl max-w-md">
                                 <DialogHeader>
-                                    <DialogTitle className="text-white">POS Settings</DialogTitle>
+                                    <DialogTitle className="text-gray-900">POS Settings</DialogTitle>
                                 </DialogHeader>
                                 <div className="space-y-4">
                                     <div className="space-y-3">
                                         <div className="flex items-center justify-between">
-                                            <span className="text-white text-sm">Sound Effects</span>
+                                            <span className="text-gray-700 text-sm">Sound Effects</span>
                                             <Button
                                                 variant={tempSettings.soundEffects ? "default" : "outline"}
                                                 size="sm"
@@ -532,7 +532,7 @@ export default function POSPage() {
                                             </Button>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <span className="text-white text-sm">Auto Print Receipt</span>
+                                            <span className="text-gray-700 text-sm">Auto Print Receipt</span>
                                             <Button
                                                 variant={tempSettings.autoReceiptPrint ? "default" : "outline"}
                                                 size="sm"
@@ -543,7 +543,7 @@ export default function POSPage() {
                                             </Button>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <span className="text-white text-sm">Show Item Images</span>
+                                            <span className="text-gray-700 text-sm">Show Item Images</span>
                                             <Button
                                                 variant={tempSettings.showItemImages ? "default" : "outline"}
                                                 size="sm"
@@ -554,7 +554,7 @@ export default function POSPage() {
                                             </Button>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <span className="text-white text-sm">Barcode Scanning</span>
+                                            <span className="text-gray-700 text-sm">Barcode Scanning</span>
                                             <Button
                                                 variant={tempSettings.barcodeScanning ? "default" : "outline"}
                                                 size="sm"
@@ -565,7 +565,7 @@ export default function POSPage() {
                                             </Button>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <span className="text-white text-sm">Compact Mode</span>
+                                            <span className="text-gray-700 text-sm">Compact Mode</span>
                                             <Button
                                                 variant={tempSettings.compactMode ? "default" : "outline"}
                                                 size="sm"
@@ -579,12 +579,12 @@ export default function POSPage() {
 
                                     <div className="border-t border-white/10 pt-4">
                                         <div className="space-y-2">
-                                            <Label className="text-white text-sm">Default Tax Rate (%)</Label>
+                                            <Label className="text-gray-700 text-sm">Default Tax Rate (%)</Label>
                                             <Input
                                                 type="number"
                                                 value={tempSettings.defaultTaxRate * 100}
                                                 onChange={(e) => setTempSettings(prev => ({ ...prev, defaultTaxRate: parseFloat(e.target.value) / 100 || 0 }))}
-                                                className="bg-white/10 border-white/20 text-white"
+                                                className="border-gray-200"
                                                 placeholder="8.5"
                                             />
                                         </div>
@@ -594,7 +594,7 @@ export default function POSPage() {
                                         <Button
                                             onClick={() => setShowSettings(false)}
                                             variant="outline"
-                                            className="flex-1 border-white/20 !text-gray-300"
+                                            className="flex-1 border-gray-200 !text-gray-500"
                                         >
                                             Cancel
                                         </Button>
@@ -628,28 +628,28 @@ export default function POSPage() {
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col">
                     {/* Toolbar */}
-                    <div className="relative bg-black/20 backdrop-blur-xl border-b border-white/10 p-4 z-10">
+                    <div className="relative bg-white/70 backdrop-blur-xl border-b border-gray-200 p-4 z-10">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-6">
                                 <Tabs value={activeTab} onValueChange={setActiveTab}>
-                                    <TabsList className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-1 shadow-lg">
-                                        <TabsTrigger value="products" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 data-[state=active]:!text-white text-gray-300 hover:!text-white rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10">
+                                    <TabsList className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-1 shadow-lg">
+                                        <TabsTrigger value="products" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 data-[state=active]:!text-white text-gray-500 hover:!text-gray-900 rounded-xl px-6 py-3 transition-all duration-300 hover:bg-gray-100">
                                             <Package className="w-4 h-4 mr-2" />
                                             Products
                                         </TabsTrigger>
-                                        <TabsTrigger value="services" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 data-[state=active]:!text-white text-gray-300 hover:!text-white rounded-xl px-6 py-3 transition-all duration-300 hover:bg-white/10">
+                                        <TabsTrigger value="services" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 data-[state=active]:!text-white text-gray-500 hover:!text-gray-900 rounded-xl px-6 py-3 transition-all duration-300 hover:bg-gray-100">
                                             <Star className="w-4 h-4 mr-2" />
                                             Services
                                         </TabsTrigger>
                                     </TabsList>
                                 </Tabs>
 
-                                <div className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-1">
+                                <div className="flex items-center space-x-2 bg-gray-50 backdrop-blur-sm border border-gray-200 rounded-2xl p-1">
                                     <Button
                                         variant={viewMode === 'grid' ? 'default' : 'ghost'}
                                         size="sm"
                                         onClick={() => setViewMode('grid')}
-                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'grid' ? 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 shadow-lg shadow-emerald-500/25 !text-white' : 'hover:bg-white/10 text-gray-300 hover:!text-white'}`}
+                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'grid' ? 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 shadow-lg shadow-emerald-500/25 !text-white' : 'hover:bg-gray-100 text-gray-500 hover:!text-gray-900'}`}
                                     >
                                         <Grid className="w-4 h-4" />
                                     </Button>
@@ -657,7 +657,7 @@ export default function POSPage() {
                                         variant={viewMode === 'list' ? 'default' : 'ghost'}
                                         size="sm"
                                         onClick={() => setViewMode('list')}
-                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'list' ? 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 shadow-lg shadow-emerald-500/25 !text-white' : 'hover:bg-white/10 text-gray-300 hover:!text-white'}`}
+                                        className={`rounded-xl transition-all duration-300 ${viewMode === 'list' ? 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 shadow-lg shadow-emerald-500/25 !text-white' : 'hover:bg-gray-100 text-gray-500 hover:!text-gray-900'}`}
                                     >
                                         <List className="w-4 h-4" />
                                     </Button>
@@ -667,34 +667,34 @@ export default function POSPage() {
                             <div className="flex items-center space-x-3">
                                 <Dialog open={showCustomer} onOpenChange={setShowCustomer}>
                                     <DialogTrigger asChild>
-                                        <Button variant="outline" size="sm" className="border-white/20 text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-emerald-500/20 hover:to-cyan-500/20 hover:border-emerald-400/40 rounded-xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/25">
+                                        <Button variant="outline" size="sm" className="border-gray-200 text-gray-500 hover:!text-gray-900 hover:bg-emerald-50 hover:border-emerald-300 rounded-xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/25">
                                             <Users className="w-4 h-4 mr-2" />
                                             {selectedCustomer ? selectedCustomer.name : "Customer"}
                                         </Button>
                                     </DialogTrigger>
-                                    <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/20 max-w-md">
+                                    <DialogContent className="bg-white backdrop-blur-xl border-gray-200 shadow-xl max-w-md">
                                         <DialogHeader>
-                                            <DialogTitle className="text-white">Select Customer</DialogTitle>
+                                            <DialogTitle className="text-gray-900">Select Customer</DialogTitle>
                                         </DialogHeader>
                                         <div className="space-y-4">
                                             <Input
                                                 placeholder="Search customers..."
                                                 value={customerSearch}
                                                 onChange={(e) => setCustomerSearch(e.target.value)}
-                                                className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                                                className="border-gray-200 placeholder-gray-400"
                                             />
                                             <div className="max-h-60 overflow-auto space-y-2">
                                                 {filteredCustomers.map((customer) => (
                                                     <div key={customer._id}
                                                         onClick={() => selectCustomer(customer)}
-                                                        className="p-3 bg-white/5 hover:bg-white/10 rounded-lg cursor-pointer border border-white/10">
+                                                        className="p-3 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer border border-gray-200">
                                                         <div className="flex justify-between items-start">
                                                             <div>
-                                                                <p className="text-white font-medium">{customer.name}</p>
-                                                                {customer.email && <p className="text-gray-400 text-sm">{customer.email}</p>}
-                                                                {customer.phone && <p className="text-gray-400 text-sm">{customer.phone}</p>}
+                                                                <p className="text-gray-900 font-medium">{customer.name}</p>
+                                                                {customer.email && <p className="text-gray-500 text-sm">{customer.email}</p>}
+                                                                {customer.phone && <p className="text-gray-500 text-sm">{customer.phone}</p>}
                                                             </div>
-                                                            <Badge className="bg-blue-500/20 text-blue-400">
+                                                            <Badge className="bg-blue-100 text-blue-700">
                                                                 {customer.loyaltyPoints} pts
                                                             </Badge>
                                                         </div>
@@ -716,24 +716,24 @@ export default function POSPage() {
 
                                 <Dialog>
                                     <DialogTrigger asChild>
-                                        <Button variant="outline" size="sm" className="border-white/20 text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-orange-500/20 hover:to-red-500/20 hover:border-orange-400/40 rounded-xl transition-all duration-300 shadow-lg hover:shadow-orange-500/25">
+                                        <Button variant="outline" size="sm" className="border-gray-200 text-gray-500 hover:!text-gray-900 hover:bg-orange-50 hover:border-orange-300 rounded-xl transition-all duration-300 shadow-lg hover:shadow-orange-500/25">
                                             <Scan className="w-4 h-4 mr-2" />
                                             Scan
                                         </Button>
                                     </DialogTrigger>
-                                    <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/20">
+                                    <DialogContent className="bg-white backdrop-blur-xl border-gray-200 shadow-xl">
                                         <DialogHeader>
-                                            <DialogTitle className="text-white">Barcode Scanner</DialogTitle>
+                                            <DialogTitle className="text-gray-900">Barcode Scanner</DialogTitle>
                                         </DialogHeader>
                                         <div className="space-y-4">
                                             <div>
-                                                <Label className="text-white mb-2 block">Enter Barcode</Label>
+                                                <Label className="text-gray-700 mb-2 block">Enter Barcode</Label>
                                                 <Input
                                                     placeholder="Scan or enter barcode..."
                                                     value={barcodeInput}
                                                     onChange={(e) => setBarcodeInput(e.target.value)}
                                                     onKeyPress={(e) => e.key === 'Enter' && handleBarcodeSearch()}
-                                                    className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                                                    className="border-gray-200 placeholder-gray-400"
                                                 />
                                             </div>
                                             <Button
@@ -760,19 +760,19 @@ export default function POSPage() {
                                     placeholder="Search products..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 rounded-xl"
+                                    className="pl-10 border-gray-200 placeholder-gray-400 rounded-xl"
                                 />
                             </div>
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Button variant="outline" className="border-white/20 !text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400/40 rounded-xl transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
+                                    <Button variant="outline" className="border-gray-200 !text-gray-500 hover:!text-gray-900 hover:bg-gradient-to-r hover:bg-cyan-50 hover:border-cyan-300 rounded-xl transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
                                         <Barcode className="w-4 h-4 mr-2" />
                                         Scan
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/20">
+                                <DialogContent className="bg-white backdrop-blur-xl border-gray-200 shadow-xl">
                                     <DialogHeader>
-                                        <DialogTitle className="text-white">Quick Barcode Scan</DialogTitle>
+                                        <DialogTitle className="text-gray-900">Quick Barcode Scan</DialogTitle>
                                     </DialogHeader>
                                     <div className="space-y-4">
                                         <Input
@@ -780,7 +780,7 @@ export default function POSPage() {
                                             value={barcodeInput}
                                             onChange={(e) => setBarcodeInput(e.target.value)}
                                             onKeyPress={(e) => e.key === 'Enter' && handleBarcodeSearch()}
-                                            className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                                            className="border-gray-200 placeholder-gray-400"
                                         />
                                         <Button
                                             onClick={handleBarcodeSearch}
@@ -802,7 +802,7 @@ export default function POSPage() {
                                     onClick={() => setSelectedCategory(category)}
                                     className={`rounded-xl transition-all duration-300 ${selectedCategory === category
                                         ? "bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700 shadow-lg shadow-emerald-500/25 !text-white"
-                                        : "border-white/20 !text-gray-500 hover:!text-white hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 hover:border-white/30"
+                                        : "border-gray-200 !text-gray-500 hover:!text-gray-900 hover:bg-gradient-to-r hover:bg-gray-100 hover:border-gray-300"
                                         }`}
                                 >
                                     {typeof category === 'string' ? category : category.name}
@@ -813,12 +813,12 @@ export default function POSPage() {
                         {/* Products Grid/List */}
                         {loading ? (
                             <div className="flex items-center justify-center h-[calc(100vh-300px)]">
-                                <div className="text-white">Loading products...</div>
+                                <div className="text-gray-500">Loading products...</div>
                             </div>
                         ) : filteredProducts.length === 0 ? (
                             <div className="flex flex-col items-center justify-center h-[calc(100vh-300px)] text-center">
                                 <Package className="w-16 h-16 text-gray-400 mb-4 opacity-50" />
-                                <h3 className="text-xl font-semibold text-white mb-2">No Products Found</h3>
+                                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Products Found</h3>
                                 <p className="text-gray-400 mb-4">There are no products available in this category.</p>
                                 <Button
                                     onClick={() => setSelectedCategory("All")}
@@ -836,16 +836,16 @@ export default function POSPage() {
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         <Card
-                                            className="bg-white/10 backdrop-blur-sm border-white/20 cursor-pointer hover:bg-white/20 transition-all rounded-xl"
+                                            className="bg-white/70 backdrop-blur-sm border-gray-200 cursor-pointer hover:bg-white shadow-sm hover:shadow-md transition-all rounded-xl"
                                             onClick={() => addToCart(product)}
                                         >
                                             <CardContent className="p-3">
-                                                <div className="aspect-square bg-white/5 rounded-lg mb-2 flex items-center justify-center text-2xl">
+                                                <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center text-2xl">
                                                     {posSettings.showItemImages ? (product.image || "📦") : "📦"}
                                                 </div>
-                                                <h3 className="text-white font-medium text-xs mb-1 truncate">{product.name}</h3>
+                                                <h3 className="text-gray-900 font-medium text-xs mb-1 truncate">{product.name}</h3>
                                                 <div className="flex justify-between items-center mb-1">
-                                                    <Badge variant="secondary" className="text-[10px] bg-white/10 px-1 py-0">
+                                                    <Badge variant="secondary" className="text-[10px] bg-gray-100 px-1 py-0">
                                                         {product.category || 'Uncategorized'}
                                                     </Badge>
                                                     <span className="text-[10px] text-gray-400">{product.stock}</span>
@@ -865,18 +865,18 @@ export default function POSPage() {
                                         whileTap={{ scale: 0.98 }}
                                     >
                                         <Card
-                                            className="bg-white/10 backdrop-blur-sm border-white/20 cursor-pointer hover:bg-white/20 transition-all rounded-xl"
+                                            className="bg-white/70 backdrop-blur-sm border-gray-200 cursor-pointer hover:bg-white shadow-sm hover:shadow-md transition-all rounded-xl"
                                             onClick={() => addToCart(product)}
                                         >
                                             <CardContent className="p-4">
                                                 <div className="flex items-center space-x-4">
-                                                    <div className="w-16 h-16 bg-white/5 rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
+                                                    <div className="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
                                                         {posSettings.showItemImages ? (product.image || "📦") : "📦"}
                                                     </div>
                                                     <div className="flex-1 min-w-0">
-                                                        <h3 className="text-white font-medium text-sm mb-1 truncate">{product.name}</h3>
+                                                        <h3 className="text-gray-900 font-medium text-sm mb-1 truncate">{product.name}</h3>
                                                         <div className="flex items-center space-x-2 mb-2">
-                                                            <Badge variant="secondary" className="text-xs bg-white/10">
+                                                            <Badge variant="secondary" className="text-xs bg-gray-100">
                                                                 {product.category || 'Uncategorized'}
                                                             </Badge>
                                                             <span className="text-xs text-gray-400">Stock: {product.stock}</span>
@@ -904,10 +904,10 @@ export default function POSPage() {
                 </div>
 
                 {/* Cart */}
-                <div className="relative w-96 bg-black/25 backdrop-blur-xl border-l border-white/10 flex flex-col z-10">
+                <div className="relative w-96 bg-white/80 backdrop-blur-xl border-l border-gray-200 shadow-lg flex flex-col z-10">
                     <div className="p-4 border-b border-white/10">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-lg font-semibold text-white flex items-center">
+                            <h2 className="text-lg font-semibold text-gray-900 flex items-center">
                                 <ShoppingCart className="w-5 h-5 mr-2" />
                                 Cart ({cart.length})
                             </h2>
@@ -916,7 +916,7 @@ export default function POSPage() {
                                     size="sm"
                                     variant="ghost"
                                     onClick={handleClearCart}
-                                    className="text-red-400 hover:text-red-300"
+                                    className="text-red-500 hover:text-red-600"
                                 >
                                     <X className="w-4 h-4" />
                                 </Button>
@@ -932,17 +932,17 @@ export default function POSPage() {
                             </div>
                         ) : (
                             cart.map((item) => (
-                                <div key={item._id} className="bg-white/5 rounded-xl p-3 border border-white/10">
+                                <div key={item._id} className="bg-gray-50 rounded-xl p-3 border border-gray-100">
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="flex-1">
-                                            <h4 className="text-white font-medium text-sm">{item.name}</h4>
+                                            <h4 className="text-gray-900 font-medium text-sm">{item.name}</h4>
                                             <p className="text-gray-400 text-xs">₵{item.price} each</p>
                                         </div>
                                         <Button
                                             size="sm"
                                             variant="ghost"
                                             onClick={() => removeItem(item._id)}
-                                            className="text-red-400 hover:text-red-300 hover:bg-red-500/20 p-1 rounded-lg transition-all duration-200 shadow-sm hover:shadow-red-500/25"
+                                            className="text-red-500 hover:text-red-600 hover:bg-red-50 p-1 rounded-lg transition-all duration-200 shadow-sm hover:shadow-red-500/25"
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </Button>
@@ -953,11 +953,11 @@ export default function POSPage() {
                                                 size="sm"
                                                 variant="outline"
                                                 onClick={() => handleQuantityChange(item._id, -1)}
-                                                className="w-8 h-8 p-0 border-white/20 hover:bg-gradient-to-r hover:from-red-500/30 hover:to-pink-500/30 hover:border-red-400/40 rounded-lg transition-all duration-200 shadow-sm hover:shadow-red-500/25 text-gray-500"
+                                                className="w-8 h-8 p-0 border-gray-200 hover:bg-gradient-to-r hover:bg-red-50 hover:border-red-300 rounded-lg transition-all duration-200 shadow-sm hover:shadow-red-500/25 text-gray-500"
                                             >
                                                 <Minus className="w-3 h-3" />
                                             </Button>
-                                            <span className="text-white font-medium w-8 text-center bg-white/5 rounded-lg py-1">
+                                            <span className="text-gray-900 font-medium w-8 text-center bg-gray-100 rounded-lg py-1">
                                                 <input
                                                     type="number"
                                                     min="1"
@@ -972,14 +972,14 @@ export default function POSPage() {
                                                         }
                                                         updateQuantity(item._id, val);
                                                     }}
-                                                    className="w-10 text-center bg-transparent text-white font-medium outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                    className="w-10 text-center bg-transparent text-gray-900 font-medium outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                                 />
                                             </span>
                                             <Button
                                                 size="sm"
                                                 variant="outline"
                                                 onClick={() => handleQuantityChange(item._id, 1)}
-                                                className="w-8 h-8 p-0 border-white/20 hover:bg-gradient-to-r hover:from-green-500/30 hover:to-emerald-500/30 hover:border-green-400/40 rounded-lg transition-all duration-200 shadow-sm hover:shadow-green-500/25 text-gray-500"
+                                                className="w-8 h-8 p-0 border-gray-200 hover:bg-gradient-to-r hover:bg-emerald-50 hover:border-emerald-300 rounded-lg transition-all duration-200 shadow-sm hover:shadow-green-500/25 text-gray-500"
                                             >
                                                 <Plus className="w-3 h-3" />
                                             </Button>
@@ -996,20 +996,20 @@ export default function POSPage() {
                     {cart.length > 0 && (
                         <div className="border-t border-white/10 p-4 space-y-4">
                             <div className="space-y-3">
-                                <div className="flex justify-between text-gray-300">
+                                <div className="flex justify-between text-gray-600">
                                     <span>Subtotal:</span>
                                     <span>₵{subtotal.toFixed(2)}</span>
                                 </div>
 
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between gap-2">
-                                        <span className="text-gray-300 text-sm">Tax:</span>
+                                        <span className="text-gray-500 text-sm">Tax:</span>
                                         <div className="flex gap-1">
                                             <Select value={taxType} onValueChange={setTaxType}>
-                                                <SelectTrigger className=" bg-white/10 border-white/20 text-white text-xs">
+                                                <SelectTrigger className=" border-gray-200 text-xs">
                                                     <SelectValue />
                                                 </SelectTrigger>
-                                                <SelectContent className=" border-white/20">
+                                                <SelectContent className=" border-gray-200">
                                                     <SelectItem value="percentage">% Percentage</SelectItem>
                                                     <SelectItem value="fixed">$ Amount</SelectItem>
                                                 </SelectContent>
@@ -1019,18 +1019,18 @@ export default function POSPage() {
                                                 placeholder="0"
                                                 value={tax}
                                                 onChange={(e) => setTax(parseFloat(e.target.value) || 0)}
-                                                className="w-16 h-8 bg-white/10 border-white/20 text-white text-sm rounded-lg"
+                                                className="w-16 h-8 border-gray-200 text-sm rounded-lg"
                                             />
                                         </div>
                                     </div>
                                     <div className="flex items-center justify-between gap-2">
-                                        <span className="text-gray-300 text-sm">Discount:</span>
+                                        <span className="text-gray-500 text-sm">Discount:</span>
                                         <div className="flex gap-1">
                                             <Select value={discountType} onValueChange={setDiscountType}>
-                                                <SelectTrigger className=" bg-white/10 border-white/20 text-white text-xs">
+                                                <SelectTrigger className=" border-gray-200 text-xs">
                                                     <SelectValue />
                                                 </SelectTrigger>
-                                                <SelectContent className=" border-white/20">
+                                                <SelectContent className=" border-gray-200">
                                                     <SelectItem value="percentage">%Percentage</SelectItem>
                                                     <SelectItem value="fixed">$Amount</SelectItem>
                                                 </SelectContent>
@@ -1040,7 +1040,7 @@ export default function POSPage() {
                                                 placeholder="0"
                                                 value={discount}
                                                 onChange={(e) => setDiscount(parseFloat(e.target.value) || 0)}
-                                                className="w-16 h-8 bg-white/10 border-white/20 text-white text-sm rounded-lg"
+                                                className="w-16 h-8 border-gray-200 text-sm rounded-lg"
                                             />
                                         </div>
                                     </div>
@@ -1061,12 +1061,12 @@ export default function POSPage() {
 
                                 <div className="border-t border-white/10 pt-2">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-xl font-bold text-white">Total:</span>
+                                        <span className="text-xl font-bold text-gray-900">Total:</span>
                                         <span className="text-2xl font-bold text-green-400">₵{total.toFixed(2)}</span>
                                     </div>
                                 </div>
                                 {selectedCustomer && (
-                                    <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-2">
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
                                         <div className="flex justify-between items-center text-blue-400 text-sm">
                                             <span>Customer: {selectedCustomer.name}</span>
                                             <span>{selectedCustomer.loyaltyPoints} pts</span>
@@ -1086,7 +1086,7 @@ export default function POSPage() {
                                     </Button>
                                     <Button
                                         // variant="outline"
-                                        className="w-full border-white/20 bg-white text-black hover:bg-gradient-to-r hover:from-green-500/20 hover:to-emerald-500/20 hover:border-green-400/40 py-3 rounded-xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-[1.02]"
+                                        className="w-full border-gray-200 bg-white text-black hover:bg-gradient-to-r hover:bg-emerald-50 hover:border-emerald-300 py-3 rounded-xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 transform hover:scale-[1.02]"
                                         onClick={() => { setShowPayment(true); setPaymentMethod("cash"); }}
                                     >
                                         <DollarSign className="w-5 h-5 mr-2" />
@@ -1096,7 +1096,7 @@ export default function POSPage() {
                             ) : (
                                 <div className="space-y-3">
                                     <div className="text-center">
-                                        <p className="text-white font-medium mb-2">
+                                        <p className="text-gray-900 font-medium mb-2">
                                             {paymentMethod === "card" ? "Card Payment" : "Cash Payment"}
                                         </p>
                                         <p className="text-2xl font-bold text-green-400">₵{total.toFixed(2)}</p>
@@ -1109,13 +1109,13 @@ export default function POSPage() {
 
                                     {paymentMethod === "cash" && (
                                         <div>
-                                            <label className="block text-sm text-gray-300 mb-2">Amount Received:</label>
+                                            <label className="block text-sm text-gray-500 mb-2">Amount Received:</label>
                                             <Input
                                                 type="number"
                                                 placeholder="0.00"
                                                 value={amountReceived}
                                                 onChange={(e) => setAmountReceived(e.target.value)}
-                                                className="bg-white/10 border-white/20 text-white rounded-xl"
+                                                className="border-gray-200 rounded-xl"
                                             />
                                         </div>
                                     )}
@@ -1123,7 +1123,7 @@ export default function POSPage() {
                                     <div className="flex space-x-2">
                                         <Button
                                             variant="outline"
-                                            className="flex-1 border-white/20 !text-gray-300 hover:!text-white hover:bg-gradient-to-r hover:from-red-500/20 hover:to-pink-500/20 hover:border-red-400/40 rounded-xl transition-all duration-300 shadow-lg hover:shadow-red-500/25"
+                                            className="flex-1 border-gray-200 !text-gray-500 hover:!text-gray-900 hover:bg-gradient-to-r hover:bg-red-50 hover:border-red-300 rounded-xl transition-all duration-300 shadow-lg hover:shadow-red-500/25"
                                             onClick={() => setShowPayment(false)}
                                         >
                                             Cancel
@@ -1145,44 +1145,44 @@ export default function POSPage() {
 
             {/* New Customer Dialog */}
             <Dialog open={showNewCustomer} onOpenChange={setShowNewCustomer}>
-                <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/20">
+                <DialogContent className="bg-white backdrop-blur-xl border-gray-200 shadow-xl">
                     <DialogHeader>
-                        <DialogTitle className="text-white">Add New Customer</DialogTitle>
+                        <DialogTitle className="text-gray-900">Add New Customer</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                         <div>
-                            <Label className="text-white mb-2 block">Name *</Label>
+                            <Label className="text-gray-700 mb-2 block">Name *</Label>
                             <Input
                                 placeholder="Customer name"
                                 value={newCustomer.name}
                                 onChange={(e) => setNewCustomer(prev => ({ ...prev, name: e.target.value }))}
-                                className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                                className="border-gray-200 placeholder-gray-400"
                             />
                         </div>
                         <div>
-                            <Label className="text-white mb-2 block">Email *</Label>
+                            <Label className="text-gray-700 mb-2 block">Email *</Label>
                             <Input
                                 type="email"
                                 placeholder="customer@example.com"
                                 value={newCustomer.email}
                                 onChange={(e) => setNewCustomer(prev => ({ ...prev, email: e.target.value }))}
-                                className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                                className="border-gray-200 placeholder-gray-400"
                             />
                         </div>
                         <div>
-                            <Label className="text-white mb-2 block">Phone</Label>
+                            <Label className="text-gray-700 mb-2 block">Phone</Label>
                             <Input
                                 placeholder="+1234567890"
                                 value={newCustomer.phone}
                                 onChange={(e) => setNewCustomer(prev => ({ ...prev, phone: e.target.value }))}
-                                className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                                className="border-gray-200 placeholder-gray-400"
                             />
                         </div>
                         <div className="flex space-x-2">
                             <Button
                                 onClick={() => setShowNewCustomer(false)}
                                 variant="outline"
-                                className="flex-1 border-white/20 !text-gray-300"
+                                className="flex-1 border-gray-200 !text-gray-500"
                             >
                                 Cancel
                             </Button>
@@ -1199,22 +1199,22 @@ export default function POSPage() {
 
             {/* Receipt Dialog */}
             <Dialog open={showReceipt} onOpenChange={setShowReceipt}>
-                <DialogContent className="bg-gray-900/95 backdrop-blur-xl border-white/20 max-w-md">
+                <DialogContent className="bg-white backdrop-blur-xl border-gray-200 shadow-xl max-w-md">
                     <DialogHeader>
-                        <DialogTitle className="text-white">Receipt</DialogTitle>
+                        <DialogTitle className="text-gray-900">Receipt</DialogTitle>
                     </DialogHeader>
                     {lastSale && (
                         <div className="space-y-4">
-                            <div className="bg-white/5 rounded-lg p-4 space-y-2">
+                            <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                                 <div className="text-center border-b border-white/10 pb-2">
-                                    <h3 className="text-white font-bold">QounterPay</h3>
-                                    <p className="text-gray-400 text-sm">{lastSale.timestamp.toLocaleString()}</p>
-                                    <p className="text-gray-400 text-sm">Receipt #{lastSale.id}</p>
+                                    <h3 className="text-gray-900 font-bold">QounterPay</h3>
+                                    <p className="text-gray-500 text-sm">{lastSale.timestamp.toLocaleString()}</p>
+                                    <p className="text-gray-500 text-sm">Receipt #{lastSale.id}</p>
                                 </div>
 
                                 {lastSale.customer && (
                                     <div className="border-b border-white/10 pb-2">
-                                        <p className="text-white text-sm">Customer: {lastSale.customer.name}</p>
+                                        <p className="text-gray-700 text-sm">Customer: {lastSale.customer.name}</p>
                                         <p className="text-gray-400 text-xs">{lastSale.customer.email}</p>
                                     </div>
                                 )}
@@ -1222,14 +1222,14 @@ export default function POSPage() {
                                 <div className="space-y-1">
                                     {lastSale.items.map((item: any, index: number) => (
                                         <div key={index} className="flex justify-between text-sm">
-                                            <span className="text-white">{item.name} x{item.quantity}</span>
-                                            <span className="text-gray-300">₵{(item.price * item.quantity).toFixed(2)}</span>
+                                            <span className="text-gray-900">{item.name} x{item.quantity}</span>
+                                            <span className="text-gray-600">₵{(item.price * item.quantity).toFixed(2)}</span>
                                         </div>
                                     ))}
                                 </div>
 
                                 <div className="border-t border-white/10 pt-2 space-y-1">
-                                    <div className="flex justify-between text-sm text-gray-300">
+                                    <div className="flex justify-between text-sm text-gray-600">
                                         <span>Subtotal:</span>
                                         <span>₵{lastSale.subtotal.toFixed(2)}</span>
                                     </div>
@@ -1239,15 +1239,15 @@ export default function POSPage() {
                                             <span>-₵{lastSale.discount.toFixed(2)}</span>
                                         </div>
                                     )}
-                                    <div className="flex justify-between text-sm text-gray-300">
+                                    <div className="flex justify-between text-sm text-gray-600">
                                         <span>Tax:</span>
                                         <span>₵{lastSale.tax.toFixed(2)}</span>
                                     </div>
-                                    <div className="flex justify-between font-bold text-white">
+                                    <div className="flex justify-between font-bold text-gray-900">
                                         <span>Total:</span>
                                         <span>₵{lastSale.total.toFixed(2)}</span>
                                     </div>
-                                    <div className="flex justify-between text-sm text-gray-300">
+                                    <div className="flex justify-between text-sm text-gray-600">
                                         <span>Payment:</span>
                                         <span>{lastSale.paymentMethod}</span>
                                     </div>
@@ -1276,7 +1276,7 @@ export default function POSPage() {
                                 <Button
                                     onClick={saveTransaction}
                                     variant="outline"
-                                    className="flex-1 border-white/20 !text-gray-300"
+                                    className="flex-1 border-gray-200 !text-gray-500"
                                 >
                                     <Save className="w-4 h-4 mr-2" />
                                     Save
