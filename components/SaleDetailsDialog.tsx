@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Receipt, User, Calendar, CreditCard, Package, RefreshCw, Download } from "lucide-react";
+import { Receipt, User, Calendar, CreditCard, Package, RefreshCw, Printer } from "lucide-react";
 import { getSaleDetails, refundSale, updateSaleStatus } from "@/lib/actions/sale.actions";
 import { toast } from "sonner";
 import { ISale } from "@/lib/types";
@@ -47,6 +47,11 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
     setActionLoading(false);
   };
 
+  const printReceipt = () => {
+    window.print();
+    toast.success("Receipt sent to printer");
+  };
+
   const getStatusBadge = (status: string) => {
     const map: Record<string, string> = {
       completed: "bg-emerald-100 text-emerald-700",
@@ -62,7 +67,7 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+        <DialogHeader className="no-print">
           <DialogTitle className="flex items-center text-gray-900">
             <Receipt className="w-5 h-5 mr-2" />Sale Details
           </DialogTitle>
@@ -72,8 +77,8 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
           <div className="text-center text-gray-400 py-8">Loading sale details...</div>
         ) : sale ? (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Sale Info */}
+            {/* Sale Info & Payment - hidden during print */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 no-print">
               <Card className="border-gray-200">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-gray-900 flex items-center justify-between text-base">
@@ -90,7 +95,6 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
                 </CardContent>
               </Card>
 
-              {/* Payment Summary */}
               <Card className="border-gray-200">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-gray-900 text-base">Payment Summary</CardTitle>
@@ -109,8 +113,8 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
               </Card>
             </div>
 
-            {/* Items */}
-            <Card className="border-gray-200">
+            {/* Items Card - hidden during print */}
+            <Card className="border-gray-200 no-print">
               <CardHeader className="pb-3">
                 <CardTitle className="text-gray-900 flex items-center text-base"><Package className="w-5 h-5 mr-2" />Items ({sale.items?.length || 0})</CardTitle>
               </CardHeader>
@@ -136,15 +140,87 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
             </Card>
 
             {sale.notes && (
-              <Card className="border-gray-200">
+              <Card className="border-gray-200 no-print">
                 <CardHeader className="pb-3"><CardTitle className="text-gray-900 text-base">Notes</CardTitle></CardHeader>
                 <CardContent><p className="text-gray-600">{sale.notes}</p></CardContent>
               </Card>
             )}
 
-            {/* Actions */}
-            <div className="flex justify-between">
-              <Button variant="outline"><Download className="w-4 h-4 mr-2" />Download Receipt</Button>
+            {/* Printable Receipt - Epson 80mm thermal */}
+            <div id="receipt-print" className="hidden print:block bg-white font-mono text-sm p-4">
+              <div className="receipt-header text-center border-b border-dashed border-gray-300 pb-3 mb-3">
+                <h2 className="text-lg font-bold tracking-wide">QounterPay</h2>
+                <p className="text-xs text-gray-500">================================</p>
+                <p className="text-xs text-gray-600">{new Date(sale.createdAt).toLocaleDateString()} {new Date(sale.createdAt).toLocaleTimeString()}</p>
+                <p className="text-xs text-gray-600">Sale: #{sale.saleNumber}</p>
+                {sale.customerName && <p className="text-xs text-gray-600">Customer: {sale.customerName}</p>}
+                {sale.customerPhone && <p className="text-xs text-gray-600">Phone: {sale.customerPhone}</p>}
+              </div>
+
+              <div className="receipt-items border-b border-dashed border-gray-300 pb-3 mb-3">
+                <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                  <span>ITEM</span>
+                  <span>AMOUNT</span>
+                </div>
+                <p className="text-xs text-gray-400 mb-1">--------------------------------</p>
+                {(sale.items || []).map((item, index) => (
+                  <div key={index} className="receipt-item mb-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="receipt-item-name text-gray-800 truncate max-w-[60%]">{item.name}</span>
+                      <span className="text-gray-800">GH₵{((item.price || 0) * item.quantity).toFixed(2)}</span>
+                    </div>
+                    <p className="text-[10px] text-gray-500 pl-2">{item.quantity} x GH₵{(item.price || 0).toFixed(2)}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="receipt-totals border-b border-dashed border-gray-300 pb-3 mb-3 space-y-1">
+                <div className="receipt-total-row flex justify-between text-xs text-gray-600">
+                  <span>Subtotal:</span>
+                  <span>GH₵{(sale.subtotal || 0).toFixed(2)}</span>
+                </div>
+                {(sale.discount || 0) > 0 && (
+                  <div className="receipt-total-row flex justify-between text-xs text-gray-600">
+                    <span>Discount:</span>
+                    <span>-GH₵{(sale.discount || 0).toFixed(2)}</span>
+                  </div>
+                )}
+                {(sale.tax || 0) > 0 && (
+                  <div className="receipt-total-row flex justify-between text-xs text-gray-600">
+                    <span>Tax:</span>
+                    <span>GH₵{(sale.tax || 0).toFixed(2)}</span>
+                  </div>
+                )}
+                <p className="text-xs text-gray-400">================================</p>
+                <div className="receipt-grand-total flex justify-between text-sm font-bold text-gray-900 pt-1">
+                  <span>TOTAL:</span>
+                  <span>GH₵{(sale.total || 0).toFixed(2)}</span>
+                </div>
+                {sale.paymentMethod && (
+                  <div className="receipt-total-row flex justify-between text-xs text-gray-600 pt-1">
+                    <span>Payment:</span>
+                    <span className="uppercase">{sale.paymentMethod}</span>
+                  </div>
+                )}
+                <div className="receipt-total-row flex justify-between text-xs text-gray-600">
+                  <span>Status:</span>
+                  <span className="uppercase">{sale.status}</span>
+                </div>
+              </div>
+
+              <div className="receipt-footer text-center pt-2">
+                <p className="text-xs text-gray-500">Thank you for your purchase!</p>
+                <p className="text-xs text-gray-500">Visit us again soon</p>
+                <p className="text-xs text-gray-400 mt-2">================================</p>
+                <p className="text-[10px] text-gray-400 mt-1">Powered by QounterPay</p>
+              </div>
+            </div>
+
+            {/* Actions - hidden during print */}
+            <div className="flex justify-between no-print">
+              <Button variant="outline" onClick={printReceipt}>
+                <Printer className="w-4 h-4 mr-2" />Print Receipt
+              </Button>
               <div className="flex space-x-2">
                 {sale.status === 'completed' && (
                   <Button variant="destructive" onClick={handleRefund} disabled={actionLoading}>

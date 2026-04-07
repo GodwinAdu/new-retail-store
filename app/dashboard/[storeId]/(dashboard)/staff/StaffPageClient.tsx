@@ -1,9 +1,12 @@
 "use client";
 
-import { Users, Search, Filter, Eye, UserCheck, Clock, ArrowLeft } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Users, Search, Eye, UserCheck, Clock, ArrowLeft, Mail, Phone, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Link from "next/link";
 import AddStaffDialog from "@/components/AddStaffDialog";
 import EditStaffDialog from "@/components/EditStaffDialog";
@@ -18,31 +21,53 @@ interface StaffPageClientProps {
     user: any;
 }
 
+const roleColors: Record<string, string> = {
+    owner: "bg-amber-100 text-amber-700",
+    admin: "bg-blue-100 text-blue-700",
+    manager: "bg-emerald-100 text-emerald-700",
+    sales_associate: "bg-cyan-100 text-cyan-700",
+    cashier: "bg-purple-100 text-purple-700",
+    inventory_manager: "bg-orange-100 text-orange-700",
+};
+
+const getInitials = (name: string) => name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+
 export default function StaffPageClient({ storeId, staff, stats, user }: StaffPageClientProps) {
     const { hasPermission } = usePermissions(user);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [roleFilter, setRoleFilter] = useState("all");
+
+    const filteredStaff = useMemo(() => {
+        return staff.filter(m => {
+            const matchesSearch = m.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                m.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (m.phoneNumber || "").includes(searchTerm);
+            const matchesRole = roleFilter === "all" || m.role === roleFilter;
+            return matchesSearch && matchesRole;
+        });
+    }, [staff, searchTerm, roleFilter]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
             <div className="p-6 overflow-auto">
                 <div className="max-w-7xl mx-auto space-y-6">
+                    {/* Header */}
                     <div className="flex items-center justify-between">
                         <div>
-                            <div className="flex items-center space-x-4 mb-2">
-                                <Link href={`/dashboard/${storeId}`}>
-                                    <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
-                                        <ArrowLeft className="w-4 h-4 mr-2" />
-                                        Back to Dashboard
-                                    </Button>
-                                </Link>
-                            </div>
+                            <Link href={`/dashboard/${storeId}`}>
+                                <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900 mb-2">
+                                    <ArrowLeft className="w-4 h-4 mr-2" />Back to Dashboard
+                                </Button>
+                            </Link>
                             <h1 className="text-3xl font-bold text-gray-900">Staff Management</h1>
-                            <p className="text-gray-500 mt-1">Manage your team members and schedules</p>
+                            <p className="text-gray-500 mt-1">Manage your team members and roles</p>
                         </div>
                         {hasPermission(PERMISSIONS.MANAGE_STAFF) && (
-                            <AddStaffDialog storeId={storeId}  />
+                            <AddStaffDialog storeId={storeId} />
                         )}
                     </div>
 
+                    {/* Stats */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                         <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
                             <CardContent className="p-6">
@@ -51,23 +76,25 @@ export default function StaffPageClient({ storeId, staff, stats, user }: StaffPa
                                         <p className="text-gray-500 text-sm">Total Staff</p>
                                         <p className="text-2xl font-bold text-gray-900">{stats.totalStaff}</p>
                                     </div>
-                                    <Users className="w-8 h-8 text-emerald-500" />
+                                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
+                                        <Users className="w-6 h-6 text-emerald-500" />
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
-
                         <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
                             <CardContent className="p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-gray-500 text-sm">On Duty</p>
+                                        <p className="text-gray-500 text-sm">Active</p>
                                         <p className="text-2xl font-bold text-gray-900">{stats.activeStaff}</p>
                                     </div>
-                                    <UserCheck className="w-8 h-8 text-cyan-500" />
+                                    <div className="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center">
+                                        <UserCheck className="w-6 h-6 text-cyan-500" />
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
-
                         <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
                             <CardContent className="p-6">
                                 <div className="flex items-center justify-between">
@@ -75,104 +102,112 @@ export default function StaffPageClient({ storeId, staff, stats, user }: StaffPa
                                         <p className="text-gray-500 text-sm">On Break</p>
                                         <p className="text-2xl font-bold text-gray-900">{stats.onBreak}</p>
                                     </div>
-                                    <Clock className="w-8 h-8 text-amber-500" />
+                                    <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center">
+                                        <Clock className="w-6 h-6 text-amber-500" />
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
-
                         <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
                             <CardContent className="p-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <p className="text-gray-500 text-sm">Avg. Hours/Week</p>
-                                        <p className="text-2xl font-bold text-gray-900">{stats.avgHours}</p>
+                                        <p className="text-gray-500 text-sm">Roles</p>
+                                        <p className="text-2xl font-bold text-gray-900">{new Set(staff.map(s => s.role)).size}</p>
                                     </div>
-                                    <div className="text-green-400">+2.3</div>
+                                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+                                        <Shield className="w-6 h-6 text-blue-500" />
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
                     </div>
 
+                    {/* Search & Filter */}
                     <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg">
                         <CardHeader>
-                            <div className="flex items-center justify-between">
-                                <CardTitle className="text-gray-900">Staff Members</CardTitle>
-                                <div className="flex space-x-2">
-                                    <Button variant="outline" size="sm">
-                                        <Search className="w-4 h-4 mr-2" />
-                                        Search
-                                    </Button>
-                                    <Button variant="outline" size="sm" >
-                                        <Filter className="w-4 h-4 mr-2" />
-                                        Filter
-                                    </Button>
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                <CardTitle className="text-gray-900">Staff Members ({filteredStaff.length})</CardTitle>
+                                <div className="flex space-x-2 w-full sm:w-auto">
+                                    <div className="relative flex-1 sm:w-56">
+                                        <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                                        <Input placeholder="Search staff..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10" />
+                                    </div>
+                                    <Select value={roleFilter} onValueChange={setRoleFilter}>
+                                        <SelectTrigger className="w-40"><SelectValue /></SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="all">All Roles</SelectItem>
+                                            <SelectItem value="manager">Manager</SelectItem>
+                                            <SelectItem value="sales_associate">Sales Associate</SelectItem>
+                                            <SelectItem value="cashier">Cashier</SelectItem>
+                                            <SelectItem value="inventory_manager">Inventory Mgr</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="overflow-x-auto">
-                                <table className="w-full">
-                                    <thead>
-                                        <tr className="border-b border-gray-100">
-                                            <th className="text-left text-gray-500 font-medium py-3">Staff Member</th>
-                                            <th className="text-left text-gray-500 font-medium py-3">Role</th>
-                                            <th className="text-left text-gray-500 font-medium py-3">Shift</th>
-                                            <th className="text-left text-gray-500 font-medium py-3">Hours/Week</th>
-                                            <th className="text-left text-gray-500 font-medium py-3">Status</th>
-                                            <th className="text-left text-gray-500 font-medium py-3">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {staff.length > 0 ? staff.map((member: any) => (
-                                            <tr key={member._id} className="border-b border-gray-50 hover:bg-gray-50/50">
-                                                <td className="py-4">
-                                                    <div>
-                                                        <p className="text-white font-medium">{member.fullName}</p>
-                                                        <p className="text-gray-400 text-sm">{member.email}</p>
-                                                        <p className="text-gray-500 text-xs">{member.phoneNumber || 'N/A'}</p>
+                            {filteredStaff.length === 0 ? (
+                                <div className="text-center py-16">
+                                    <Users className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                                    <p className="text-lg font-medium text-gray-500">
+                                        {searchTerm || roleFilter !== "all" ? "No staff found matching your criteria." : "No staff members yet."}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {filteredStaff.map((member: any) => (
+                                        <div key={member._id} className="border border-gray-100 rounded-xl p-4 hover:bg-gray-50/50 hover:shadow-md transition-all">
+                                            <div className="flex items-start gap-3">
+                                                {/* Avatar */}
+                                                <div className={`w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${member.isActive ? 'bg-gradient-to-br from-emerald-400 to-cyan-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                                                    {getInitials(member.fullName)}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center justify-between">
+                                                        <h3 className="text-gray-900 font-semibold truncate">{member.fullName}</h3>
+                                                        <Badge className={`${member.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-600'} border-0 text-[10px] ml-2`}>
+                                                            {member.isActive ? 'Active' : 'Inactive'}
+                                                        </Badge>
                                                     </div>
-                                                </td>
-                                                <td className="py-4">
-                                                    <Badge className="bg-blue-500/20 text-blue-400 border-0">
+                                                    <Badge className={`${roleColors[member.role] || 'bg-gray-100 text-gray-600'} border-0 text-[10px] mt-1`}>
                                                         {member.role.replace('_', ' ').toUpperCase()}
                                                     </Badge>
-                                                </td>
-                                                <td className="py-4 text-gray-600">Full Day</td>
-                                                <td className="py-4 text-gray-900 font-medium">40h</td>
-                                                <td className="py-4">
-                                                    <Badge className={`${
-                                                        member.isActive ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                                                    } border-0`}>
-                                                        {member.isActive ? 'ACTIVE' : 'INACTIVE'}
-                                                    </Badge>
-                                                </td>
-                                                <td className="py-4">
-                                                    <div className="flex space-x-2">
-                                                        {hasPermission(PERMISSIONS.VIEW_STAFF) && (
-                                                            <Button size="sm" variant="ghost" className="text-emerald-600 hover:text-emerald-700">
-                                                                <Eye className="w-4 h-4" />
-                                                            </Button>
-                                                        )}
-                                                        {hasPermission(PERMISSIONS.MANAGE_STAFF) && (
-                                                            <EditStaffDialog staff={member} />
-                                                        )}
-                                                        {hasPermission(PERMISSIONS.MANAGE_STAFF) && (
-                                                            <DeleteStaffDialog staffId={member._id} staffName={member.fullName} />
-                                                        )}
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-3 space-y-1.5 text-sm">
+                                                <div className="flex items-center gap-2 text-gray-500">
+                                                    <Mail className="w-3.5 h-3.5 text-gray-400" />
+                                                    <span className="truncate">{member.email}</span>
+                                                </div>
+                                                {member.phoneNumber && (
+                                                    <div className="flex items-center gap-2 text-gray-500">
+                                                        <Phone className="w-3.5 h-3.5 text-gray-400" />
+                                                        <span>{member.phoneNumber}</span>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        )) : (
-                                            <tr>
-                                                <td colSpan={6} className="py-8 text-center text-gray-400">
-                                                    <Users className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                                                    <p>No staff members found</p>
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </tbody>
-                                </table>
-                            </div>
+                                                )}
+                                                {member.lastLogin && (
+                                                    <div className="flex items-center gap-2 text-gray-400 text-xs">
+                                                        <Clock className="w-3 h-3" />
+                                                        Last login: {new Date(member.lastLogin).toLocaleDateString()}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Actions */}
+                                            <div className="flex gap-2 mt-3 pt-3 border-t border-gray-100">
+                                                {hasPermission(PERMISSIONS.MANAGE_STAFF) && (
+                                                    <EditStaffDialog staff={member} />
+                                                )}
+                                                {hasPermission(PERMISSIONS.MANAGE_STAFF) && (
+                                                    <DeleteStaffDialog staffId={member._id} staffName={member.fullName} />
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </CardContent>
                     </Card>
                 </div>

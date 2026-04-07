@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Trash2, Loader2, AlertTriangle } from "lucide-react";
 import { deleteStaffMember } from "@/lib/actions/staff.actions";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface DeleteStaffDialogProps {
     staffId: string;
@@ -19,14 +20,13 @@ export default function DeleteStaffDialog({ staffId, staffName }: DeleteStaffDia
 
     const handleDelete = async () => {
         setLoading(true);
-
         try {
             await deleteStaffMember(staffId);
+            toast.success("Staff member deleted");
             setOpen(false);
             router.refresh();
         } catch (error) {
-            console.error("Error deleting staff member:", error);
-            alert("Failed to delete staff member");
+            toast.error("Failed to delete staff member");
         } finally {
             setLoading(false);
         }
@@ -35,38 +35,25 @@ export default function DeleteStaffDialog({ staffId, staffName }: DeleteStaffDia
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button size="sm" variant="ghost" className="text-red-400 hover:text-red-300">
-                    <Trash2 className="w-4 h-4" />
+                <Button size="sm" variant="outline" className="text-red-500 hover:text-red-600 hover:border-red-200">
+                    <Trash2 className="w-3.5 h-3.5" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="bg-slate-900 border-slate-700 text-white">
+            <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className="flex items-center text-red-400">
-                        <AlertTriangle className="w-5 h-5 mr-2" />
-                        Delete Staff Member
+                    <DialogTitle className="flex items-center text-red-600">
+                        <AlertTriangle className="w-5 h-5 mr-2" />Delete Staff Member
                     </DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
-                    <p className="text-gray-300">
-                        Are you sure you want to delete <span className="font-semibold text-white">{staffName}</span>? 
+                    <p className="text-gray-600">
+                        Are you sure you want to delete <span className="font-semibold text-gray-900">{staffName}</span>?
                         This action cannot be undone.
                     </p>
                     <div className="flex justify-end space-x-2">
-                        <Button 
-                            type="button" 
-                            variant="outline" 
-                            onClick={() => setOpen(false)} 
-                            className="border-slate-600 text-white hover:bg-slate-800"
-                        >
-                            Cancel
-                        </Button>
-                        <Button 
-                            onClick={handleDelete} 
-                            disabled={loading} 
-                            className="bg-red-600 hover:bg-red-700"
-                        >
-                            {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                            Delete Staff
+                        <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+                        <Button onClick={handleDelete} disabled={loading} variant="destructive">
+                            {loading && <Loader2 className="w-4 h-4 animate-spin mr-2" />}Delete
                         </Button>
                     </div>
                 </div>
