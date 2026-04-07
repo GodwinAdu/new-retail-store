@@ -137,6 +137,7 @@ export default function SuppliersClient({ storeId }: { storeId: string }) {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/30 to-cyan-50/20">
       <div className="p-6 overflow-auto">
         <div className="max-w-7xl mx-auto space-y-6">
@@ -338,5 +339,6 @@ export default function SuppliersClient({ storeId }: { storeId: string }) {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+    </>
   );
 }
