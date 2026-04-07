@@ -1193,47 +1193,45 @@ export default function POSPage() {
                 </DialogContent>
             </Dialog>
 
-            {/* Receipt Dialog */}
-            <Dialog open={showReceipt} onOpenChange={setShowReceipt}>
-                <DialogContent className="max-w-[340px] p-0 gap-0 rounded-lg overflow-hidden">
-                    <div className="no-print px-3 pt-3 pb-1 border-b">
-                        <h3 className="text-sm font-semibold text-gray-900">Receipt Preview</h3>
-                    </div>
-                    {lastSale && (
-                        <div>
-                            <div className="max-h-[70vh] overflow-y-auto">
-                                <ThermalReceipt
-                                    data={{
-                                        storeName: "QounterPay",
-                                        saleNumber: lastSale.saleNumber || lastSale.id,
-                                        date: lastSale.timestamp,
-                                        cashier: currentUser?.fullName,
-                                        customerName: lastSale.customerName,
-                                        items: lastSale.items.map((item: any) => ({
-                                            name: item.name,
-                                            quantity: item.quantity,
-                                            price: item.price,
-                                        })),
-                                        subtotal: lastSale.subtotal,
-                                        discount: lastSale.discount || 0,
-                                        tax: lastSale.tax || 0,
-                                        total: lastSale.total,
-                                        paymentMethod: lastSale.paymentMethod,
-                                        amountPaid: lastSale.paymentMethod === "cash" ? lastSale.subtotal + (lastSale.change || 0) : undefined,
-                                        change: lastSale.change || 0,
-                                    }}
-                                />
-                            </div>
-                            <div className="flex gap-2 no-print px-3 pb-3 pt-2 border-t">
-                                <Button onClick={() => { window.print(); toast.success("Receipt sent to printer"); }} size="sm" className="flex-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-xs h-8">
-                                    <Printer className="w-3 h-3 mr-1" />Print
-                                </Button>
-                                <Button onClick={() => setShowReceipt(false)} variant="outline" size="sm" className="flex-1 text-xs h-8">Close</Button>
-                            </div>
+            {/* Receipt Panel */}
+            {showReceipt && lastSale && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                    <div className="fixed inset-0 bg-black/50 no-print" onClick={() => setShowReceipt(false)} />
+                    <div className="relative z-10 bg-white rounded-lg shadow-2xl max-w-[340px] w-full max-h-[90vh] flex flex-col">
+                        <div className="no-print px-3 pt-3 pb-1 border-b flex items-center justify-between">
+                            <h3 className="text-sm font-semibold text-gray-900">Receipt Preview</h3>
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => setShowReceipt(false)}><X className="w-3 h-3" /></Button>
                         </div>
-                    )}
-                </DialogContent>
-            </Dialog>
+                        <div className="overflow-y-auto flex-1">
+                            <ThermalReceipt
+                                data={{
+                                    storeName: "QounterPay",
+                                    saleNumber: lastSale.saleNumber || lastSale.id,
+                                    date: lastSale.timestamp,
+                                    cashier: currentUser?.fullName,
+                                    customerName: lastSale.customerName,
+                                    items: lastSale.items.map((item: any) => ({
+                                        name: item.name,
+                                        quantity: item.quantity,
+                                        price: item.price,
+                                    })),
+                                    subtotal: lastSale.subtotal,
+                                    discount: lastSale.discount || 0,
+                                    tax: lastSale.tax || 0,
+                                    total: lastSale.total,
+                                    paymentMethod: lastSale.paymentMethod,
+                                    amountPaid: lastSale.paymentMethod === "cash" ? lastSale.subtotal + (lastSale.change || 0) : undefined,
+                                    change: lastSale.change || 0,
+                                }}
+                            />
+                        </div>
+                        <div className="flex gap-2 no-print px-3 pb-3 pt-2 border-t">
+                            <Button onClick={() => { window.print(); toast.success("Receipt sent to printer"); }} size="sm" className="flex-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-xs h-8"><Printer className="w-3 h-3 mr-1" />Print</Button>
+                            <Button onClick={() => setShowReceipt(false)} variant="outline" size="sm" className="flex-1 text-xs h-8">Close</Button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Product Variation Dialog */}
             <ProductVariationDialog

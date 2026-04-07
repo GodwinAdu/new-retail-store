@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Plus, Search, Edit, Trash2, Phone, Mail, MapPin, ArrowLeft, Users, CheckCircle, XCircle, Package } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
@@ -31,6 +32,8 @@ export default function SuppliersClient({ storeId }: { storeId: string }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSupplier, setEditingSupplier] = useState<Supplier | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Supplier | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "", contact: "", email: "", phone: "", address: "", paymentTerms: "", notes: ""
   });
@@ -82,16 +85,19 @@ export default function SuppliersClient({ storeId }: { storeId: string }) {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (supplierId: string) => {
-    if (confirm("Are you sure you want to delete this supplier?")) {
-      try {
-        const { deleteSupplier } = await import("@/lib/actions/supplier.actions");
-        const result = await deleteSupplier(storeId, supplierId);
-        if (result?.success) { toast.success("Supplier deleted"); fetchSuppliers(); }
-        else toast.error(result?.error || "Failed to delete supplier");
-      } catch (error: any) {
-        toast.error(error.message || "Failed to delete supplier");
-      }
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleteLoading(true);
+    try {
+      const { deleteSupplier } = await import("@/lib/actions/supplier.actions");
+      const result = await deleteSupplier(storeId, deleteTarget._id);
+      if (result?.success) { toast.success("Supplier deleted"); fetchSuppliers(); }
+      else toast.error(result?.error || "Failed to delete supplier");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to delete supplier");
+    } finally {
+      setDeleteLoading(false);
+      setDeleteTarget(null);
     }
   };
 
@@ -302,7 +308,7 @@ export default function SuppliersClient({ storeId }: { storeId: string }) {
                       <Button size="sm" variant="outline" onClick={() => handleEdit(supplier)} className="flex-1">
                         <Edit className="w-4 h-4 mr-1" />Edit
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => handleDelete(supplier._id)} className="text-red-500 hover:text-red-600 hover:border-red-200">
+                      <Button size="sm" variant="outline" onClick={() => setDeleteTarget(supplier)} className="text-red-500 hover:text-red-600 hover:border-red-200">
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
@@ -314,5 +320,23 @@ export default function SuppliersClient({ storeId }: { storeId: string }) {
         </div>
       </div>
     </div>
+
+    {/* Delete Confirmation */}
+    <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Supplier</AlertDialogTitle>
+          <AlertDialogDescription>
+            Are you sure you want to delete <span className="font-semibold text-gray-900">{deleteTarget?.name}</span>? This action cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={deleteLoading}>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDelete} disabled={deleteLoading} className="bg-red-600 hover:bg-red-700 text-white">
+            {deleteLoading ? "Deleting..." : "Delete"}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

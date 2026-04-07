@@ -138,18 +138,29 @@
     overflow: visible !important;
   }
 
-  body > *:not(#receipt-print) {
-    display: none !important;
+  /* Hide everything */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Show only the receipt and all its children */
+  #receipt-print,
+  #receipt-print *,
+  #receipt-print ~ *  {
+    visibility: visible !important;
   }
 
   #receipt-print {
-    display: block !important;
-    visibility: visible !important;
-    position: static !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 80mm !important;
-    margin: 0 !important;
+    max-width: 80mm !important;
     padding: 2mm 4mm !important;
+    margin: 0 !important;
     box-sizing: border-box !important;
+    background: white !important;
+    z-index: 999999 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
