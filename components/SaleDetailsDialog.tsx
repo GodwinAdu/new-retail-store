@@ -9,6 +9,7 @@ import { Receipt, User, Calendar, CreditCard, Package, RefreshCw, Printer } from
 import { getSaleDetails, refundSale, updateSaleStatus } from "@/lib/actions/sale.actions";
 import { toast } from "sonner";
 import { ISale } from "@/lib/types";
+import ThermalReceipt from "@/components/ThermalReceipt";
 
 interface SaleDetailsDialogProps {
   saleId: string | null;
@@ -146,74 +147,27 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
               </Card>
             )}
 
-            {/* Printable Receipt - Epson 80mm thermal */}
-            <div id="receipt-print" className="hidden print:block bg-white font-mono text-sm p-4">
-              <div className="receipt-header text-center border-b border-dashed border-gray-300 pb-3 mb-3">
-                <h2 className="text-lg font-bold tracking-wide">QounterPay</h2>
-                <p className="text-xs text-gray-500">================================</p>
-                <p className="text-xs text-gray-600">{new Date(sale.createdAt).toLocaleDateString()} {new Date(sale.createdAt).toLocaleTimeString()}</p>
-                <p className="text-xs text-gray-600">Sale: #{sale.saleNumber}</p>
-                {sale.customerName && <p className="text-xs text-gray-600">Customer: {sale.customerName}</p>}
-                {sale.customerPhone && <p className="text-xs text-gray-600">Phone: {sale.customerPhone}</p>}
-              </div>
-
-              <div className="receipt-items border-b border-dashed border-gray-300 pb-3 mb-3">
-                <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
-                  <span>ITEM</span>
-                  <span>AMOUNT</span>
-                </div>
-                <p className="text-xs text-gray-400 mb-1">--------------------------------</p>
-                {(sale.items || []).map((item, index) => (
-                  <div key={index} className="receipt-item mb-1">
-                    <div className="flex justify-between text-xs">
-                      <span className="receipt-item-name text-gray-800 truncate max-w-[60%]">{item.name}</span>
-                      <span className="text-gray-800">GH₵{((item.price || 0) * item.quantity).toFixed(2)}</span>
-                    </div>
-                    <p className="text-[10px] text-gray-500 pl-2">{item.quantity} x GH₵{(item.price || 0).toFixed(2)}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="receipt-totals border-b border-dashed border-gray-300 pb-3 mb-3 space-y-1">
-                <div className="receipt-total-row flex justify-between text-xs text-gray-600">
-                  <span>Subtotal:</span>
-                  <span>GH₵{(sale.subtotal || 0).toFixed(2)}</span>
-                </div>
-                {(sale.discount || 0) > 0 && (
-                  <div className="receipt-total-row flex justify-between text-xs text-gray-600">
-                    <span>Discount:</span>
-                    <span>-GH₵{(sale.discount || 0).toFixed(2)}</span>
-                  </div>
-                )}
-                {(sale.tax || 0) > 0 && (
-                  <div className="receipt-total-row flex justify-between text-xs text-gray-600">
-                    <span>Tax:</span>
-                    <span>GH₵{(sale.tax || 0).toFixed(2)}</span>
-                  </div>
-                )}
-                <p className="text-xs text-gray-400">================================</p>
-                <div className="receipt-grand-total flex justify-between text-sm font-bold text-gray-900 pt-1">
-                  <span>TOTAL:</span>
-                  <span>GH₵{(sale.total || 0).toFixed(2)}</span>
-                </div>
-                {sale.paymentMethod && (
-                  <div className="receipt-total-row flex justify-between text-xs text-gray-600 pt-1">
-                    <span>Payment:</span>
-                    <span className="uppercase">{sale.paymentMethod}</span>
-                  </div>
-                )}
-                <div className="receipt-total-row flex justify-between text-xs text-gray-600">
-                  <span>Status:</span>
-                  <span className="uppercase">{sale.status}</span>
-                </div>
-              </div>
-
-              <div className="receipt-footer text-center pt-2">
-                <p className="text-xs text-gray-500">Thank you for your purchase!</p>
-                <p className="text-xs text-gray-500">Visit us again soon</p>
-                <p className="text-xs text-gray-400 mt-2">================================</p>
-                <p className="text-[10px] text-gray-400 mt-1">Powered by QounterPay</p>
-              </div>
+            {/* Printable Receipt - hidden on screen, shown during print */}
+            <div className="hidden print:block">
+              <ThermalReceipt
+                data={{
+                  storeName: "QounterPay",
+                  saleNumber: sale.saleNumber,
+                  date: new Date(sale.createdAt),
+                  customerName: sale.customerName || undefined,
+                  customerPhone: sale.customerPhone || undefined,
+                  items: (sale.items || []).map((item) => ({
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price || 0,
+                  })),
+                  subtotal: sale.subtotal || 0,
+                  discount: sale.discount || 0,
+                  tax: sale.tax || 0,
+                  total: sale.total || 0,
+                  paymentMethod: sale.paymentMethod || "N/A",
+                }}
+              />
             </div>
 
             {/* Actions - hidden during print */}

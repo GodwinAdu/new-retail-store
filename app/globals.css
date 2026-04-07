@@ -122,114 +122,38 @@
 }
 
 
-/* Epson Thermal Printer Receipt Styles (80mm paper) */
+/* Epson Thermal Printer Receipt (80mm paper) */
 @media print {
   @page {
     size: 80mm auto;
     margin: 0;
   }
 
-  body * {
-    visibility: hidden !important;
+  html, body {
+    width: 80mm !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: visible !important;
   }
 
-  #receipt-print,
-  #receipt-print * {
-    visibility: visible !important;
+  body > *:not(#receipt-print) {
+    display: none !important;
   }
 
   #receipt-print {
     display: block !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
+    visibility: visible !important;
+    position: static !important;
     width: 80mm !important;
-    max-width: 80mm !important;
-    padding: 2mm 3mm !important;
     margin: 0 !important;
-    background: white !important;
-    color: black !important;
-    font-family: 'Courier New', monospace !important;
-    font-size: 11px !important;
-    line-height: 1.4 !important;
-    z-index: 99999 !important;
+    padding: 2mm 4mm !important;
+    box-sizing: border-box !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  #receipt-print .receipt-header {
-    text-align: center;
-    border-bottom: 1px dashed black;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-  }
-
-  #receipt-print .receipt-header h2 {
-    font-size: 16px !important;
-    font-weight: bold;
-    margin: 0;
-    letter-spacing: 1px;
-  }
-
-  #receipt-print .receipt-header p {
-    font-size: 10px !important;
-    margin: 1px 0;
-  }
-
-  #receipt-print .receipt-items {
-    border-bottom: 1px dashed black;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-  }
-
-  #receipt-print .receipt-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px !important;
-    padding: 1px 0;
-  }
-
-  #receipt-print .receipt-item-name {
-    max-width: 55%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  #receipt-print .receipt-totals {
-    border-bottom: 1px dashed black;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-  }
-
-  #receipt-print .receipt-total-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px !important;
-    padding: 1px 0;
-  }
-
-  #receipt-print .receipt-grand-total {
-    font-size: 14px !important;
-    font-weight: bold;
-    border-top: 1px solid black;
-    padding-top: 3px;
-    margin-top: 3px;
-  }
-
-  #receipt-print .receipt-footer {
-    text-align: center;
-    font-size: 10px !important;
-    padding-top: 4px;
-    border-top: 1px dashed black;
-  }
-
-  #receipt-print .receipt-barcode {
-    text-align: center;
-    font-family: 'Libre Barcode 39', monospace;
-    font-size: 28px;
-    margin: 4px 0;
-  }
-
-  /* Hide non-print elements inside receipt */
   .no-print {
     display: none !important;
   }
