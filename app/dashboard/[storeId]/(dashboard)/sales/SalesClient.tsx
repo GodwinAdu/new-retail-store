@@ -14,6 +14,8 @@ import SaleDetailsDialog from "@/components/SaleDetailsDialog";
 import CreateSaleDialog from "@/components/CreateSaleDialog";
 import { getSales, getSaleStats } from "@/lib/actions/sale.actions";
 import { ISale } from "@/lib/types";
+import ThermalReceipt from "@/components/ThermalReceipt";
+import { Printer } from "lucide-react";
 import { format, subDays } from "date-fns";
 
 interface SalesClientProps {
@@ -46,6 +48,7 @@ export default function SalesClient({ storeId, initialSales, initialStats }: Sal
   const [selectedSaleId, setSelectedSaleId] = useState<string | null>(null);
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [printSale, setPrintSale] = useState<ISale | null>(null);
 
   useEffect(() => {
     let filtered = sales.filter(sale =>
@@ -306,7 +309,44 @@ export default function SalesClient({ storeId, initialSales, initialStats }: Sal
         </div>
       </div>
 
-      <SaleDetailsDialog saleId={selectedSaleId} open={detailsDialogOpen} onOpenChange={setDetailsDialogOpen} onSaleUpdated={refreshData} />
+      <SaleDetailsDialog saleId={selectedSaleId} open={detailsDialogOpen} onOpenChange={setDetailsDialogOpen} onSaleUpdated={refreshData} onPrintReceipt={(sale) => setPrintSale(sale)} />
+
+      {/* Receipt Panel - outside dialog for printing */}
+      {printSale && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black/50 no-print" onClick={() => setPrintSale(null)} />
+          <div className="relative z-10 bg-white rounded-lg shadow-2xl max-w-[340px] w-full max-h-[90vh] flex flex-col">
+            <div className="no-print px-3 pt-3 pb-1 border-b flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-gray-900">Receipt Preview</h3>
+              <button className="text-gray-400 hover:text-gray-600" onClick={() => setPrintSale(null)}>&times;</button>
+            </div>
+            <div className="overflow-y-auto flex-1">
+              <ThermalReceipt
+                data={{
+                  storeName: "QounterPay",
+                  saleNumber: printSale.saleNumber,
+                  date: new Date(printSale.createdAt),
+                  customerName: printSale.customerName || undefined,
+                  items: (printSale.items || []).map((item) => ({
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price || 0,
+                  })),
+                  subtotal: printSale.subtotal || 0,
+                  discount: printSale.discount || 0,
+                  tax: printSale.tax || 0,
+                  total: printSale.total || 0,
+                  paymentMethod: printSale.paymentMethod || "N/A",
+                }}
+              />
+            </div>
+            <div className="flex gap-2 no-print px-3 pb-3 pt-2 border-t">
+              <button onClick={() => { window.print(); }} className="flex-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white text-xs h-8 rounded-md flex items-center justify-center gap-1 hover:opacity-90">Print</button>
+              <button onClick={() => setPrintSale(null)} className="flex-1 border border-gray-200 text-gray-600 text-xs h-8 rounded-md hover:bg-gray-50">Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

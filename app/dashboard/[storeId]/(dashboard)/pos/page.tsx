@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { ShoppingCart, Plus, Minus, Trash2, CreditCard, DollarSign, Search, Barcode, User, Settings, Clock, Receipt, X, Check, Zap, TrendingUp, Package, Grid, List, Maximize2, Minimize2, Users, Percent, Scan, Star, Printer, Save, UserPlus, ArrowLeft } from "lucide-react";
+import { ShoppingCart, Plus, Minus, Trash2, CreditCard, DollarSign, Search, Barcode, User, Settings, Clock, Receipt, X, Check, Zap, TrendingUp, Package, Grid, List, Maximize2, Minimize2, Users, Percent, Scan, Star, Printer, Save, UserPlus, ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,6 +59,7 @@ export default function POSPage() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showPayment, setShowPayment] = useState(false);
+    const [showTaxDiscount, setShowTaxDiscount] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("");
     const [amountReceived, setAmountReceived] = useState("");
     const [showCustomer, setShowCustomer] = useState(false);
@@ -288,7 +289,7 @@ export default function POSPage() {
 
                 // Update customer loyalty points
                 if (selectedCustomer && posSettings.loyaltyProgram) {
-                    const points = Math.floor(total / 10); // 1 point per $10
+                    const points = Math.floor(total / 10); // 1 point per GH₵10
                     await updateCustomerLoyaltyPoints(selectedCustomer._id, points);
                 }
 
@@ -997,6 +998,15 @@ export default function POSPage() {
                                     <span>₵{subtotal.toFixed(2)}</span>
                                 </div>
 
+                                <button
+                                    type="button"
+                                    onClick={() => setShowTaxDiscount(!showTaxDiscount)}
+                                    className="flex items-center justify-between w-full text-xs text-gray-400 hover:text-gray-600 transition-colors py-1"
+                                >
+                                    <span>Tax & Discount</span>
+                                    {showTaxDiscount ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                                </button>
+                                {showTaxDiscount && (
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between gap-2">
                                         <span className="text-gray-500 text-sm">Tax:</span>
@@ -1007,7 +1017,7 @@ export default function POSPage() {
                                                 </SelectTrigger>
                                                 <SelectContent className=" border-gray-200">
                                                     <SelectItem value="percentage">% Percentage</SelectItem>
-                                                    <SelectItem value="fixed">$ Amount</SelectItem>
+                                                    <SelectItem value="fixed">₵ Amount</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                             <Input
@@ -1028,7 +1038,7 @@ export default function POSPage() {
                                                 </SelectTrigger>
                                                 <SelectContent className=" border-gray-200">
                                                     <SelectItem value="percentage">%Percentage</SelectItem>
-                                                    <SelectItem value="fixed">$Amount</SelectItem>
+                                                    <SelectItem value="fixed">₵ Amount</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                             <Input
@@ -1041,16 +1051,17 @@ export default function POSPage() {
                                         </div>
                                     </div>
                                 </div>
+                                )}
 
                                 {tax > 0 && (
                                     <div className="flex justify-between text-blue-400">
-                                        <span>Tax ({taxType === 'percentage' ? tax + '%' : '$' + tax}):</span>
+                                        <span>Tax ({taxType === 'percentage' ? tax + '%' : '₵' + tax}):</span>
                                         <span>+₵{(taxType === 'percentage' ? (subtotal * tax) / 100 : tax).toFixed(2)}</span>
                                     </div>
                                 )}
                                 {discount > 0 && (
                                     <div className="flex justify-between text-green-400">
-                                        <span>Discount ({discountType === 'percentage' ? discount + '%' : '$' + discount}):</span>
+                                        <span>Discount ({discountType === 'percentage' ? discount + '%' : '₵' + discount}):</span>
                                         <span>-₵{(discountType === 'percentage' ? (subtotal * discount) / 100 : discount).toFixed(2)}</span>
                                     </div>
                                 )}

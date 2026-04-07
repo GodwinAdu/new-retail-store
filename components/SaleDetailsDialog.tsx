@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,19 +10,21 @@ import { Receipt, User, Calendar, CreditCard, Package, RefreshCw, Printer } from
 import { getSaleDetails, refundSale, updateSaleStatus } from "@/lib/actions/sale.actions";
 import { toast } from "sonner";
 import { ISale } from "@/lib/types";
-import ThermalReceipt from "@/components/ThermalReceipt";
 
 interface SaleDetailsDialogProps {
   saleId: string | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSaleUpdated: () => void;
+  onPrintReceipt?: (sale: ISale) => void;
 }
 
-export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUpdated }: SaleDetailsDialogProps) {
+export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUpdated, onPrintReceipt }: SaleDetailsDialogProps) {
   const [sale, setSale] = useState<ISale | null>(null);
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
+  const [refundConfirm, setRefundConfirm] = useState(false);
+  const [completeConfirm, setCompleteConfirm] = useState(false);
 
   useEffect(() => {
     if (saleId && open) {
@@ -34,7 +37,7 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
     if (!sale) return;
     setActionLoading(true);
     const result = await refundSale(sale._id);
-    if (result.success) { toast.success("Sale refunded"); onSaleUpdated(); onOpenChange(false); }
+    if (result.success) { toast.success("Sale refunded"); setRefundConfirm(false); onSaleUpdated(); onOpenChange(false); }
     else toast.error(result.error || "Failed to refund sale");
     setActionLoading(false);
   };
@@ -43,14 +46,13 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
     if (!sale) return;
     setActionLoading(true);
     const result = await updateSaleStatus(sale._id, status);
-    if (result.success) { toast.success("Status updated"); setSale({ ...sale, status }); onSaleUpdated(); }
+    if (result.success) { toast.success("Status updated"); setSale({ ...sale, status }); setCompleteConfirm(false); onSaleUpdated(); }
     else toast.error(result.error || "Failed to update status");
     setActionLoading(false);
   };
 
   const printReceipt = () => {
-    window.print();
-    toast.success("Receipt sent to printer");
+    if (sale && onPrintReceipt) onPrintReceipt(sale);
   };
 
   const getStatusBadge = (status: string) => {
@@ -147,29 +149,6 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
               </Card>
             )}
 
-            {/* Printable Receipt - hidden on screen, shown during print */}
-            <div className="hidden print:block">
-              <ThermalReceipt
-                data={{
-                  storeName: "QounterPay",
-                  saleNumber: sale.saleNumber,
-                  date: new Date(sale.createdAt),
-                  customerName: sale.customerName || undefined,
-                  customerPhone: sale.customerPhone || undefined,
-                  items: (sale.items || []).map((item) => ({
-                    name: item.name,
-                    quantity: item.quantity,
-                    price: item.price || 0,
-                  })),
-                  subtotal: sale.subtotal || 0,
-                  discount: sale.discount || 0,
-                  tax: sale.tax || 0,
-                  total: sale.total || 0,
-                  paymentMethod: sale.paymentMethod || "N/A",
-                }}
-              />
-            </div>
-
             {/* Actions - hidden during print */}
             <div className="flex justify-between no-print">
               <Button variant="outline" onClick={printReceipt}>
@@ -177,17 +156,53 @@ export default function SaleDetailsDialog({ saleId, open, onOpenChange, onSaleUp
               </Button>
               <div className="flex space-x-2">
                 {sale.status === 'completed' && (
-                  <Button variant="destructive" onClick={handleRefund} disabled={actionLoading}>
-                    {actionLoading && <RefreshCw className="w-4 h-4 mr-2 animate-spin" />}Refund Sale
+                  <Button variant="destructive" onClick={() => setRefundConfirm(true)} disabled={actionLoading}>
+                    Refund Sale
                   </Button>
                 )}
                 {sale.status === 'pending' && (
-                  <Button onClick={() => handleStatusUpdate('completed')} disabled={actionLoading} className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700">
-                    {actionLoading && <RefreshCw className="w-4 h-4 mr-2 animate-spin" />}Mark Completed
+                  <Button onClick={() => setCompleteConfirm(true)} disabled={actionLoading} className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700">
+                    Mark Completed
                   </Button>
                 )}
               </div>
             </div>
+
+            {/* Refund Confirmation */}
+            <AlertDialog open={refundConfirm} onOpenChange={setRefundConfirm}>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Refund Sale #{sale.saleNumber}?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will refund <span className="font-semibold text-gray-900">GH₵{(sale.total || 0).toFixed(2)}</span> and reverse customer loyalty points. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel disabled={actionLoading}>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleRefund} disabled={actionLoading} className="bg-red-600 hover:bg-red-700 text-white">
+                    {actionLoading ? "Processing..." : "Confirm Refund"}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+
+            {/* Complete Confirmation */}
+            <AlertDialog open={completeConfirm} onOpenChange={setCompleteConfirm}>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Mark Sale #{sale.saleNumber} as Completed?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will mark the sale as completed and update the payment status.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel disabled={actionLoading}>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => handleStatusUpdate('completed')} disabled={actionLoading} className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-blue-700 text-white">
+                    {actionLoading ? "Processing..." : "Confirm"}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         ) : (
           <div className="text-center text-gray-400 py-8">Sale not found</div>

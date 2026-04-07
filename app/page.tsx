@@ -234,7 +234,7 @@ export default function HomePage() {
                           transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0 }}
                         >
                           <div className="text-emerald-400 text-xs mb-1">Revenue</div>
-                          <div className="text-white font-bold text-lg">$47.2K</div>
+                          <div className="text-white font-bold text-lg">GH₵47.2K</div>
                           <div className="text-emerald-300 text-xs">+12.5%</div>
                         </motion.div>
                         <motion.div 
@@ -281,9 +281,9 @@ export default function HomePage() {
                       <div className="space-y-2">
                         <div className="text-white text-sm font-medium mb-2">Recent Transactions</div>
                         {[
-                          { item: "iPhone 15 Pro", amount: "$999", status: "completed" },
-                          { item: "MacBook Air", amount: "$1,299", status: "pending" },
-                          { item: "AirPods Pro", amount: "$249", status: "completed" }
+                          { item: "iPhone 15 Pro", amount: "GH₵999", status: "completed" },
+                          { item: "MacBook Air", amount: "GH₵1,299", status: "pending" },
+                          { item: "AirPods Pro", amount: "GH₵249", status: "completed" }
                         ].map((transaction, i) => (
                           <motion.div
                             key={i}
@@ -374,7 +374,7 @@ export default function HomePage() {
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
               <div className="text-4xl font-black text-purple-400 mb-2">
-                $<AnimatedCounter end={2} />
+                GH₵<AnimatedCounter end={2} />
                 B+
               </div>
               <div className="text-gray-300 font-medium">Processed</div>
