@@ -141,7 +141,7 @@ export default function POSPage() {
 
     const filteredProducts = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        const matchesCategory = selectedCategory === "All" || product.categoryId.name === selectedCategory;
+        const matchesCategory = selectedCategory === "All" || product.categoryId?.name === selectedCategory || product.category === selectedCategory;
         return matchesSearch && matchesCategory;
     });
 
